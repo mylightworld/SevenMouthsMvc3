@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<h2>Login</h2>
+
+<form action="/Users/Login" method="post">
+    <div>
+        <ul>
+            <li>邮箱或用户名：<input type="text" name="emailOrName" id="emailOrName" /></li>
+            <li>密码：<input type="password" name="password" id="password" /></li>
+            <li><input type="submit" value="登录" /></li>
+        </ul>
+        <div class="message">@ViewBag.message</div>
+    </div>
+</form>

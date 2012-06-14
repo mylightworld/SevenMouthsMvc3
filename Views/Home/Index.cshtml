@@ -1,0 +1,47 @@
+﻿@using SevenMouths.Models
+@model List<Share>
+@{
+    ViewBag.Title = "Index";
+    SevenMouthsEntities context = new SevenMouthsEntities();
+    User sharer;
+    List<Comment> comments;
+    
+}
+
+<h2>Index</h2>
+<div>
+    <table>
+    <thead>
+        <tr>
+            <td>编号</td>
+            <td>标题</td>
+            <td>分类</td>
+            <td>分享者</td>
+            <td>时间</td>
+        </tr>
+    </thead>
+        @foreach (var share in Model)
+        { 
+            sharer = context.Users.FirstOrDefault(x => x.UserId == share.SharedBy);
+            comments = context.Comments.Where(x => x.ShareId == share.ShareId).ToList();
+            <tr>
+                <td>@share.ShareNum</td>
+                <td><a href ="@share.Url">@share.Title</a></td>
+                <td></td>
+                
+                <td><img src="@sharer.MainPictureUrl" alt="" class="head-portrait"/>@sharer.Name</td>
+                <td>@share.SharedAt</td>
+            </tr>
+            <tr></tr>
+        }
+     <tfoot>
+        <tr>
+            <td>编号</td>
+            <td>标题</td>
+            <td>分类</td>
+            <td>分享者</td>
+            <td>时间</td>
+        </tr>
+    </tfoot>
+    </table>
+</div>

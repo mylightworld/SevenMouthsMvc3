@@ -1,0 +1,11 @@
+﻿@using SevenMouths.Models
+@using SevenMouths.Helpers
+@{
+    CookieHelper cookie = new CookieHelper();
+    String userName = "";
+    using(SevenMouthsEntities context = new SevenMouthsEntities())
+    {
+        context.users.FirstOrDefault(x => x.UserId == 
+    }
+    
+  }
