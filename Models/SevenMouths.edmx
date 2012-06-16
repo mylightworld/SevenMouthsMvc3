@@ -4,9 +4,9 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SevenMouthsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="SevenMouthsModelStoreContainer">
-          <EntitySet Name="Categories" EntityType="SevenMouthsModel.Store.Categories" store:Type="Tables" store:Schema="dbo" store:Name="Categories">
+    <Schema Namespace="SevenMouths.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SevenMouthsStoreContainer">
+          <EntitySet Name="Categories" EntityType="SevenMouths.Store.Categories" store:Type="Tables" store:Schema="dbo" store:Name="Categories">
             <DefiningQuery>SELECT 
       [Categories].[CategoryId] AS [CategoryId], 
       [Categories].[Name] AS [Name], 
@@ -15,30 +15,31 @@
       [Categories].[CreatedAt] AS [CreatedAt]
       FROM [dbo].[Categories] AS [Categories]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Comments" EntityType="SevenMouthsModel.Store.Comments" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Cosites" EntityType="SevenMouthsModel.Store.Cosites" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CoSiteUsers" EntityType="SevenMouthsModel.Store.CoSiteUsers" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Pictures" EntityType="SevenMouthsModel.Store.Pictures" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Roles" EntityType="SevenMouthsModel.Store.Roles" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ShareCategories" EntityType="SevenMouthsModel.Store.ShareCategories" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="SharePictures" EntityType="SevenMouthsModel.Store.SharePictures" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Shares" EntityType="SevenMouthsModel.Store.Shares" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserRoles" EntityType="SevenMouthsModel.Store.UserRoles" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Users" EntityType="SevenMouthsModel.Store.Users" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Votes" EntityType="SevenMouthsModel.Store.Votes" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_Comments_Shares" Association="SevenMouthsModel.Store.FK_Comments_Shares">
+          <EntitySet Name="Comments" EntityType="SevenMouths.Store.Comments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Cosites" EntityType="SevenMouths.Store.Cosites" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CoSiteUsers" EntityType="SevenMouths.Store.CoSiteUsers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pictures" EntityType="SevenMouths.Store.Pictures" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="SevenMouths.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ShareCategories" EntityType="SevenMouths.Store.ShareCategories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SharePictures" EntityType="SevenMouths.Store.SharePictures" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Shares" EntityType="SevenMouths.Store.Shares" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="SevenMouths.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserRoles" EntityType="SevenMouths.Store.UserRoles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="SevenMouths.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Votes" EntityType="SevenMouths.Store.Votes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Comments_Shares" Association="SevenMouths.Store.FK_Comments_Shares">
             <End Role="Shares" EntitySet="Shares" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK_CoSiteUsers_Cosites" Association="SevenMouthsModel.Store.FK_CoSiteUsers_Cosites">
+          <AssociationSet Name="FK_CoSiteUsers_Cosites" Association="SevenMouths.Store.FK_CoSiteUsers_Cosites">
             <End Role="Cosites" EntitySet="Cosites" />
             <End Role="CoSiteUsers" EntitySet="CoSiteUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_CoSiteUsers_CoSiteUsers" Association="SevenMouthsModel.Store.FK_CoSiteUsers_CoSiteUsers">
+          <AssociationSet Name="FK_CoSiteUsers_CoSiteUsers" Association="SevenMouths.Store.FK_CoSiteUsers_CoSiteUsers">
             <End Role="Users" EntitySet="Users" />
             <End Role="CoSiteUsers" EntitySet="CoSiteUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Votes_Shares" Association="SevenMouthsModel.Store.FK_Votes_Shares">
+          <AssociationSet Name="FK_Votes_Shares" Association="SevenMouths.Store.FK_Votes_Shares">
             <End Role="Shares" EntitySet="Shares" />
             <End Role="Votes" EntitySet="Votes" />
           </AssociationSet>
@@ -134,6 +135,16 @@
           <Property Name="SharedAt" Type="datetime" />
           <Property Name="Url" Type="nvarchar" MaxLength="512" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="UserRoles">
           <Key>
             <PropertyRef Name="UserId" />
@@ -149,7 +160,7 @@
           <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserNum" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="64" />
-          <Property Name="Email" Type="nvarchar" MaxLength="64" />
+          <Property Name="Email" Type="nvarchar" MaxLength="512" />
           <Property Name="Password" Type="nvarchar" MaxLength="64" />
           <Property Name="Description" Type="nvarchar" MaxLength="512" />
           <Property Name="MainPictureUrl" Type="nvarchar" MaxLength="256" />
@@ -165,8 +176,8 @@
           <Property Name="VotedAt" Type="datetime" />
         </EntityType>
         <Association Name="FK_Comments_Shares">
-          <End Role="Shares" Type="SevenMouthsModel.Store.Shares" Multiplicity="1" />
-          <End Role="Comments" Type="SevenMouthsModel.Store.Comments" Multiplicity="0..1" />
+          <End Role="Shares" Type="SevenMouths.Store.Shares" Multiplicity="1" />
+          <End Role="Comments" Type="SevenMouths.Store.Comments" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Shares">
               <PropertyRef Name="ShareId" />
@@ -177,8 +188,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CoSiteUsers_Cosites">
-          <End Role="Cosites" Type="SevenMouthsModel.Store.Cosites" Multiplicity="1" />
-          <End Role="CoSiteUsers" Type="SevenMouthsModel.Store.CoSiteUsers" Multiplicity="0..1" />
+          <End Role="Cosites" Type="SevenMouths.Store.Cosites" Multiplicity="1" />
+          <End Role="CoSiteUsers" Type="SevenMouths.Store.CoSiteUsers" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Cosites">
               <PropertyRef Name="CoSiteId" />
@@ -189,8 +200,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CoSiteUsers_CoSiteUsers">
-          <End Role="Users" Type="SevenMouthsModel.Store.Users" Multiplicity="1" />
-          <End Role="CoSiteUsers" Type="SevenMouthsModel.Store.CoSiteUsers" Multiplicity="0..1" />
+          <End Role="Users" Type="SevenMouths.Store.Users" Multiplicity="1" />
+          <End Role="CoSiteUsers" Type="SevenMouths.Store.CoSiteUsers" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" />
@@ -201,8 +212,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Votes_Shares">
-          <End Role="Shares" Type="SevenMouthsModel.Store.Shares" Multiplicity="0..1" />
-          <End Role="Votes" Type="SevenMouthsModel.Store.Votes" Multiplicity="*" />
+          <End Role="Shares" Type="SevenMouths.Store.Shares" Multiplicity="0..1" />
+          <End Role="Votes" Type="SevenMouths.Store.Votes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Shares">
               <PropertyRef Name="ShareId" />
@@ -212,37 +223,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+        <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SevenMouthsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Schema Namespace="SevenMouths" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="SevenMouthsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Categories" EntityType="SevenMouthsModel.Category" />
-          <EntitySet Name="Comments" EntityType="SevenMouthsModel.Comment" />
-          <EntitySet Name="Cosites" EntityType="SevenMouthsModel.Cosite" />
-          <EntitySet Name="CoSiteUsers" EntityType="SevenMouthsModel.CoSiteUser" />
-          <EntitySet Name="Pictures" EntityType="SevenMouthsModel.Picture" />
-          <EntitySet Name="Roles" EntityType="SevenMouthsModel.Role" />
-          <EntitySet Name="ShareCategories" EntityType="SevenMouthsModel.ShareCategory" />
-          <EntitySet Name="SharePictures" EntityType="SevenMouthsModel.SharePicture" />
-          <EntitySet Name="Shares" EntityType="SevenMouthsModel.Share" />
-          <EntitySet Name="UserRoles" EntityType="SevenMouthsModel.UserRole" />
-          <EntitySet Name="Users" EntityType="SevenMouthsModel.User" />
-          <EntitySet Name="Votes" EntityType="SevenMouthsModel.Vote" />
-          <AssociationSet Name="FK_Comments_Shares" Association="SevenMouthsModel.FK_Comments_Shares">
+          <EntitySet Name="Categories" EntityType="SevenMouths.Category" />
+          <EntitySet Name="Comments" EntityType="SevenMouths.Comment" />
+          <EntitySet Name="Cosites" EntityType="SevenMouths.Cosite" />
+          <EntitySet Name="CoSiteUsers" EntityType="SevenMouths.CoSiteUser" />
+          <EntitySet Name="Pictures" EntityType="SevenMouths.Picture" />
+          <EntitySet Name="Roles" EntityType="SevenMouths.Role" />
+          <EntitySet Name="ShareCategories" EntityType="SevenMouths.ShareCategory" />
+          <EntitySet Name="SharePictures" EntityType="SevenMouths.SharePicture" />
+          <EntitySet Name="Shares" EntityType="SevenMouths.Share" />
+          <EntitySet Name="sysdiagrams" EntityType="SevenMouths.sysdiagram" />
+          <EntitySet Name="UserRoles" EntityType="SevenMouths.UserRole" />
+          <EntitySet Name="Users" EntityType="SevenMouths.User" />
+          <EntitySet Name="Votes" EntityType="SevenMouths.Vote" />
+          <AssociationSet Name="FK_Comments_Shares" Association="SevenMouths.FK_Comments_Shares">
             <End Role="Shares" EntitySet="Shares" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK_CoSiteUsers_Cosites" Association="SevenMouthsModel.FK_CoSiteUsers_Cosites">
+          <AssociationSet Name="FK_CoSiteUsers_Cosites" Association="SevenMouths.FK_CoSiteUsers_Cosites">
             <End Role="Cosites" EntitySet="Cosites" />
             <End Role="CoSiteUsers" EntitySet="CoSiteUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_CoSiteUsers_CoSiteUsers" Association="SevenMouthsModel.FK_CoSiteUsers_CoSiteUsers">
+          <AssociationSet Name="FK_CoSiteUsers_CoSiteUsers" Association="SevenMouths.FK_CoSiteUsers_CoSiteUsers">
             <End Role="Users" EntitySet="Users" />
             <End Role="CoSiteUsers" EntitySet="CoSiteUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Votes_Shares" Association="SevenMouthsModel.FK_Votes_Shares">
+          <AssociationSet Name="FK_Votes_Shares" Association="SevenMouths.FK_Votes_Shares">
             <End Role="Shares" EntitySet="Shares" />
             <End Role="Votes" EntitySet="Votes" />
           </AssociationSet>
@@ -268,7 +310,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="CommentedBy" Type="Int32" />
           <Property Name="CommentedAt" Type="DateTime" />
-          <NavigationProperty Name="Share" Relationship="SevenMouthsModel.FK_Comments_Shares" FromRole="Comments" ToRole="Shares" />
+          <NavigationProperty Name="Share" Relationship="SevenMouths.FK_Comments_Shares" FromRole="Comments" ToRole="Shares" />
         </EntityType>
         <EntityType Name="Cosite">
           <Key>
@@ -279,7 +321,7 @@
           <Property Name="Code" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
           <Property Name="Url" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="CoSiteUser" Relationship="SevenMouthsModel.FK_CoSiteUsers_Cosites" FromRole="Cosites" ToRole="CoSiteUsers" />
+          <NavigationProperty Name="CoSiteUser" Relationship="SevenMouths.FK_CoSiteUsers_Cosites" FromRole="Cosites" ToRole="CoSiteUsers" />
         </EntityType>
         <EntityType Name="CoSiteUser">
           <Key>
@@ -289,8 +331,8 @@
           <Property Name="CoSiteId" Type="Int32" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="CreatedAt" Type="DateTime" />
-          <NavigationProperty Name="Cosite" Relationship="SevenMouthsModel.FK_CoSiteUsers_Cosites" FromRole="CoSiteUsers" ToRole="Cosites" />
-          <NavigationProperty Name="User" Relationship="SevenMouthsModel.FK_CoSiteUsers_CoSiteUsers" FromRole="CoSiteUsers" ToRole="Users" />
+          <NavigationProperty Name="Cosite" Relationship="SevenMouths.FK_CoSiteUsers_Cosites" FromRole="CoSiteUsers" ToRole="Cosites" />
+          <NavigationProperty Name="User" Relationship="SevenMouths.FK_CoSiteUsers_CoSiteUsers" FromRole="CoSiteUsers" ToRole="Users" />
         </EntityType>
         <EntityType Name="Picture">
           <Key>
@@ -337,9 +379,19 @@
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="SharedBy" Type="Int32" />
           <Property Name="SharedAt" Type="DateTime" />
-          <Property Name="Url" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Comment" Relationship="SevenMouthsModel.FK_Comments_Shares" FromRole="Shares" ToRole="Comments" />
-          <NavigationProperty Name="Votes" Relationship="SevenMouthsModel.FK_Votes_Shares" FromRole="Shares" ToRole="Votes" />
+          <NavigationProperty Name="Comment" Relationship="SevenMouths.FK_Comments_Shares" FromRole="Shares" ToRole="Comments" />
+          <NavigationProperty Name="Votes" Relationship="SevenMouths.FK_Votes_Shares" FromRole="Shares" ToRole="Votes" />
+          <Property Type="String" Name="Url" MaxLength="512" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -356,11 +408,11 @@
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserNum" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
           <Property Name="Password" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
           <Property Name="MainPictureUrl" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="CoSiteUser" Relationship="SevenMouthsModel.FK_CoSiteUsers_CoSiteUsers" FromRole="Users" ToRole="CoSiteUsers" />
+          <NavigationProperty Name="CoSiteUser" Relationship="SevenMouths.FK_CoSiteUsers_CoSiteUsers" FromRole="Users" ToRole="CoSiteUsers" />
+          <Property Type="String" Name="Email" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Vote">
           <Key>
@@ -371,11 +423,11 @@
           <Property Name="Value" Type="Int32" />
           <Property Name="VotedBy" Type="Int32" />
           <Property Name="VotedAt" Type="DateTime" />
-          <NavigationProperty Name="Share" Relationship="SevenMouthsModel.FK_Votes_Shares" FromRole="Votes" ToRole="Shares" />
+          <NavigationProperty Name="Share" Relationship="SevenMouths.FK_Votes_Shares" FromRole="Votes" ToRole="Shares" />
         </EntityType>
         <Association Name="FK_Comments_Shares">
-          <End Role="Shares" Type="SevenMouthsModel.Share" Multiplicity="1" />
-          <End Role="Comments" Type="SevenMouthsModel.Comment" Multiplicity="0..1" />
+          <End Role="Shares" Type="SevenMouths.Share" Multiplicity="1" />
+          <End Role="Comments" Type="SevenMouths.Comment" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Shares">
               <PropertyRef Name="ShareId" />
@@ -386,8 +438,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CoSiteUsers_Cosites">
-          <End Role="Cosites" Type="SevenMouthsModel.Cosite" Multiplicity="1" />
-          <End Role="CoSiteUsers" Type="SevenMouthsModel.CoSiteUser" Multiplicity="0..1" />
+          <End Role="Cosites" Type="SevenMouths.Cosite" Multiplicity="1" />
+          <End Role="CoSiteUsers" Type="SevenMouths.CoSiteUser" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Cosites">
               <PropertyRef Name="CoSiteId" />
@@ -398,8 +450,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CoSiteUsers_CoSiteUsers">
-          <End Role="Users" Type="SevenMouthsModel.User" Multiplicity="1" />
-          <End Role="CoSiteUsers" Type="SevenMouthsModel.CoSiteUser" Multiplicity="0..1" />
+          <End Role="Users" Type="SevenMouths.User" Multiplicity="1" />
+          <End Role="CoSiteUsers" Type="SevenMouths.CoSiteUser" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserId" />
@@ -410,8 +462,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Votes_Shares">
-          <End Role="Shares" Type="SevenMouthsModel.Share" Multiplicity="0..1" />
-          <End Role="Votes" Type="SevenMouthsModel.Vote" Multiplicity="*" />
+          <End Role="Shares" Type="SevenMouths.Share" Multiplicity="0..1" />
+          <End Role="Votes" Type="SevenMouths.Vote" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Shares">
               <PropertyRef Name="ShareId" />
@@ -426,15 +478,15 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SevenMouthsModelStoreContainer" CdmEntityContainer="SevenMouthsEntities">
-          <EntitySetMapping Name="Categories"><EntityTypeMapping TypeName="SevenMouthsModel.Category"><MappingFragment StoreEntitySet="Categories">
+        <EntityContainerMapping StorageEntityContainer="SevenMouthsStoreContainer" CdmEntityContainer="SevenMouthsEntities">
+          <EntitySetMapping Name="Categories"><EntityTypeMapping TypeName="SevenMouths.Category"><MappingFragment StoreEntitySet="Categories">
             <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Description" ColumnName="Description" />
             <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
             <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Comments"><EntityTypeMapping TypeName="SevenMouthsModel.Comment"><MappingFragment StoreEntitySet="Comments">
+          <EntitySetMapping Name="Comments"><EntityTypeMapping TypeName="SevenMouths.Comment"><MappingFragment StoreEntitySet="Comments">
             <ScalarProperty Name="CommentId" ColumnName="CommentId" />
             <ScalarProperty Name="ShareId" ColumnName="ShareId" />
             <ScalarProperty Name="ParentId" ColumnName="ParentId" />
@@ -443,64 +495,71 @@
             <ScalarProperty Name="CommentedBy" ColumnName="CommentedBy" />
             <ScalarProperty Name="CommentedAt" ColumnName="CommentedAt" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Cosites"><EntityTypeMapping TypeName="SevenMouthsModel.Cosite"><MappingFragment StoreEntitySet="Cosites">
+          <EntitySetMapping Name="Cosites"><EntityTypeMapping TypeName="SevenMouths.Cosite"><MappingFragment StoreEntitySet="Cosites">
             <ScalarProperty Name="CoSiteId" ColumnName="CoSiteId" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Code" ColumnName="Code" />
             <ScalarProperty Name="Url" ColumnName="Url" />
             <ScalarProperty Name="Description" ColumnName="Description" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="CoSiteUsers"><EntityTypeMapping TypeName="SevenMouthsModel.CoSiteUser"><MappingFragment StoreEntitySet="CoSiteUsers">
+          <EntitySetMapping Name="CoSiteUsers"><EntityTypeMapping TypeName="SevenMouths.CoSiteUser"><MappingFragment StoreEntitySet="CoSiteUsers">
             <ScalarProperty Name="CoSiteUserId" ColumnName="CoSiteUserId" />
             <ScalarProperty Name="CoSiteId" ColumnName="CoSiteId" />
             <ScalarProperty Name="UserId" ColumnName="UserId" />
             <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Pictures"><EntityTypeMapping TypeName="SevenMouthsModel.Picture"><MappingFragment StoreEntitySet="Pictures">
+          <EntitySetMapping Name="Pictures"><EntityTypeMapping TypeName="SevenMouths.Picture"><MappingFragment StoreEntitySet="Pictures">
             <ScalarProperty Name="PictureId" ColumnName="PictureId" />
             <ScalarProperty Name="Url" ColumnName="Url" />
             <ScalarProperty Name="Description" ColumnName="Description" />
             <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
             <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Roles"><EntityTypeMapping TypeName="SevenMouthsModel.Role"><MappingFragment StoreEntitySet="Roles">
+          <EntitySetMapping Name="Roles"><EntityTypeMapping TypeName="SevenMouths.Role"><MappingFragment StoreEntitySet="Roles">
             <ScalarProperty Name="RoleId" ColumnName="RoleId" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Description" ColumnName="Description" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="ShareCategories"><EntityTypeMapping TypeName="SevenMouthsModel.ShareCategory"><MappingFragment StoreEntitySet="ShareCategories">
+          <EntitySetMapping Name="ShareCategories"><EntityTypeMapping TypeName="SevenMouths.ShareCategory"><MappingFragment StoreEntitySet="ShareCategories">
             <ScalarProperty Name="ShareId" ColumnName="ShareId" />
             <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
             <ScalarProperty Name="Description" ColumnName="Description" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="SharePictures"><EntityTypeMapping TypeName="SevenMouthsModel.SharePicture"><MappingFragment StoreEntitySet="SharePictures">
+          <EntitySetMapping Name="SharePictures"><EntityTypeMapping TypeName="SevenMouths.SharePicture"><MappingFragment StoreEntitySet="SharePictures">
             <ScalarProperty Name="ShareId" ColumnName="ShareId" />
             <ScalarProperty Name="PictureId" ColumnName="PictureId" />
             <ScalarProperty Name="Description" ColumnName="Description" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Shares"><EntityTypeMapping TypeName="SevenMouthsModel.Share"><MappingFragment StoreEntitySet="Shares">
-            <ScalarProperty Name="ShareId" ColumnName="ShareId" />
+          <EntitySetMapping Name="Shares"><EntityTypeMapping TypeName="SevenMouths.Share"><MappingFragment StoreEntitySet="Shares">
+            <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ShareId" ColumnName="ShareId" />
             <ScalarProperty Name="ShareNum" ColumnName="ShareNum" />
             <ScalarProperty Name="Title" ColumnName="Title" />
             <ScalarProperty Name="Description" ColumnName="Description" />
             <ScalarProperty Name="SharedBy" ColumnName="SharedBy" />
             <ScalarProperty Name="SharedAt" ColumnName="SharedAt" />
-            <ScalarProperty Name="Url" ColumnName="Url" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="UserRoles"><EntityTypeMapping TypeName="SevenMouthsModel.UserRole"><MappingFragment StoreEntitySet="UserRoles">
+          <EntitySetMapping Name="sysdiagrams"><EntityTypeMapping TypeName="SevenMouths.sysdiagram"><MappingFragment StoreEntitySet="sysdiagrams">
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+            <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+            <ScalarProperty Name="version" ColumnName="version" />
+            <ScalarProperty Name="definition" ColumnName="definition" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="UserRoles"><EntityTypeMapping TypeName="SevenMouths.UserRole"><MappingFragment StoreEntitySet="UserRoles">
             <ScalarProperty Name="UserId" ColumnName="UserId" />
             <ScalarProperty Name="RoleId" ColumnName="RoleId" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="SevenMouthsModel.User"><MappingFragment StoreEntitySet="Users">
-            <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="SevenMouths.User"><MappingFragment StoreEntitySet="Users">
+            <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
             <ScalarProperty Name="UserNum" ColumnName="UserNum" />
             <ScalarProperty Name="Name" ColumnName="Name" />
-            <ScalarProperty Name="Email" ColumnName="Email" />
             <ScalarProperty Name="Password" ColumnName="Password" />
             <ScalarProperty Name="Description" ColumnName="Description" />
             <ScalarProperty Name="MainPictureUrl" ColumnName="MainPictureUrl" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Votes"><EntityTypeMapping TypeName="SevenMouthsModel.Vote"><MappingFragment StoreEntitySet="Votes">
+          <EntitySetMapping Name="Votes"><EntityTypeMapping TypeName="SevenMouths.Vote"><MappingFragment StoreEntitySet="Votes">
             <ScalarProperty Name="VoteId" ColumnName="VoteId" />
             <ScalarProperty Name="ShareId" ColumnName="ShareId" />
             <ScalarProperty Name="Value" ColumnName="Value" />
@@ -529,34 +588,35 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="SevenMouths">
-        <EntityTypeShape EntityType="SevenMouthsModel.Category" Width="1.5" PointX="0.75" PointY="7.75" Height="1.9700325520833326" IsExpanded="true" />
-        <EntityTypeShape EntityType="SevenMouthsModel.Comment" Width="1.5" PointX="3" PointY="1.125" Height="2.5430916341145826" IsExpanded="true" />
-        <EntityTypeShape EntityType="SevenMouthsModel.Cosite" Width="1.5" PointX="5.75" PointY="0.875" Height="2.1610522460937496" IsExpanded="true" />
-        <EntityTypeShape EntityType="SevenMouthsModel.CoSiteUser" Width="1.5" PointX="8" PointY="0.875" Height="2.1610522460937496" IsExpanded="true" />
-        <EntityTypeShape EntityType="SevenMouthsModel.Picture" Width="1.5" PointX="2.75" PointY="7.75" Height="1.9700325520833317" IsExpanded="true" />
-        <EntityTypeShape EntityType="SevenMouthsModel.Role" Width="1.5" PointX="7.75" PointY="4.75" Height="1.5879931640624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="SevenMouthsModel.ShareCategory" Width="1.5" PointX="7.75" PointY="7.75" Height="1.5879931640624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="SevenMouthsModel.SharePicture" Width="1.5" PointX="4.75" PointY="8.75" Height="1.5879931640624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="SevenMouthsModel.Share" Width="1.5" PointX="0.75" PointY="2.5" Height="2.734111328125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SevenMouthsModel.UserRole" Width="1.5" PointX="9.75" PointY="4.75" Height="1.3969734700520817" IsExpanded="true" />
-        <EntityTypeShape EntityType="SevenMouthsModel.User" Width="1.5" PointX="5.75" PointY="5.25" Height="2.5430916341145817" IsExpanded="true" />
-        <EntityTypeShape EntityType="SevenMouthsModel.Vote" Width="1.5" PointX="3" PointY="4.375" Height="2.1610522460937531" IsExpanded="true" />
-        <AssociationConnector Association="SevenMouthsModel.FK_Comments_Shares" ManuallyRouted="false">
+        <EntityTypeShape EntityType="SevenMouths.Category" Width="1.5" PointX="0.75" PointY="7.75" Height="1.9700325520833326" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.Comment" Width="1.5" PointX="3" PointY="1.125" Height="2.5430916341145826" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.Cosite" Width="1.5" PointX="5.75" PointY="0.875" Height="2.1610522460937496" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.CoSiteUser" Width="1.5" PointX="8" PointY="0.875" Height="2.1610522460937496" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.Picture" Width="1.5" PointX="2.75" PointY="7.75" Height="1.9700325520833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.Role" Width="1.5" PointX="7.75" PointY="4.75" Height="1.5879931640624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.ShareCategory" Width="1.5" PointX="7.75" PointY="7.75" Height="1.5879931640624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.SharePicture" Width="1.5" PointX="4.75" PointY="8.75" Height="1.5879931640624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.Share" Width="1.5" PointX="0.75" PointY="2.5" Height="2.5430916341145822" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.sysdiagram" Width="1.5" PointX="9.75" PointY="4.75" Height="1.9700325520833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.UserRole" Width="1.5" PointX="9.75" PointY="7.75" Height="1.3969734700520853" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.User" Width="1.5" PointX="5.75" PointY="4.875" Height="2.3520719401041745" IsExpanded="true" />
+        <EntityTypeShape EntityType="SevenMouths.Vote" Width="1.5" PointX="3" PointY="4.375" Height="2.1610522460937531" IsExpanded="true" />
+        <AssociationConnector Association="SevenMouths.FK_Comments_Shares" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="3.0840458170572913" />
           <ConnectorPoint PointX="3" PointY="3.0840458170572913" />
         </AssociationConnector>
-        <AssociationConnector Association="SevenMouthsModel.FK_CoSiteUsers_Cosites" ManuallyRouted="false">
+        <AssociationConnector Association="SevenMouths.FK_CoSiteUsers_Cosites" ManuallyRouted="false">
           <ConnectorPoint PointX="7.25" PointY="1.9555261230468748" />
           <ConnectorPoint PointX="8" PointY="1.9555261230468748" />
         </AssociationConnector>
-        <AssociationConnector Association="SevenMouthsModel.FK_CoSiteUsers_CoSiteUsers" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.25" PointY="7.04399658203125" />
-          <ConnectorPoint PointX="9.40625" PointY="7.04399658203125" />
+        <AssociationConnector Association="SevenMouths.FK_CoSiteUsers_CoSiteUsers" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.25" PointY="6.8137825520833371" />
+          <ConnectorPoint PointX="9.40625" PointY="6.8137825520833371" />
           <ConnectorPoint PointX="9.40625" PointY="3.0360522460937496" />
         </AssociationConnector>
-        <AssociationConnector Association="SevenMouthsModel.FK_Votes_Shares" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="4.8045556640625" />
-          <ConnectorPoint PointX="3" PointY="4.8045556640625" />
+        <AssociationConnector Association="SevenMouths.FK_Votes_Shares" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.7090458170572909" />
+          <ConnectorPoint PointX="3" PointY="4.7090458170572909" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

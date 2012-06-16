@@ -131,6 +131,12 @@ namespace SevenMouths.Models
         }
         private ObjectSet<Share> _shares;
     
+        public ObjectSet<sysdiagram> sysdiagrams
+        {
+            get { return _sysdiagrams  ?? (_sysdiagrams = CreateObjectSet<sysdiagram>("sysdiagrams")); }
+        }
+        private ObjectSet<sysdiagram> _sysdiagrams;
+    
         public ObjectSet<UserRole> UserRoles
         {
             get { return _userRoles  ?? (_userRoles = CreateObjectSet<UserRole>("UserRoles")); }

@@ -73,21 +73,6 @@ namespace SevenMouths.Models
         private string _name;
     
         [DataMember]
-        public string Email
-        {
-            get { return _email; }
-            set
-            {
-                if (_email != value)
-                {
-                    _email = value;
-                    OnPropertyChanged("Email");
-                }
-            }
-        }
-        private string _email;
-    
-        [DataMember]
         public string Password
         {
             get { return _password; }
@@ -131,6 +116,21 @@ namespace SevenMouths.Models
             }
         }
         private string _mainPictureUrl;
+    
+        [DataMember]
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                if (_email != value)
+                {
+                    _email = value;
+                    OnPropertyChanged("Email");
+                }
+            }
+        }
+        private string _email;
 
         #endregion
         #region Navigation Properties
