@@ -9,9 +9,6 @@ namespace SevenMouths.Controllers
 {
     public class SharesController : BaseController
     {
-        //
-        // GET: /Shares/
-
         public ActionResult Index()
         {
             return View();
@@ -51,6 +48,26 @@ namespace SevenMouths.Controllers
                 context.Votes.AddObject(vote);
                 context.SaveChanges();
             }
+
+            return RedirectToAction("/Home/Index");
+        }
+
+        //提交评论
+        [HttpPost]
+        public ActionResult SubmitComment(FormCollection collection)
+        { 
+            int shareId = int.Parse(collection["shareId"]);
+            int parentId = int.Parse(collection["parentId"]);
+
+            Comment commnet = new Comment();
+            commnet.ShareId = shareId;
+            commnet.ParentId = parentId;
+            commnet.Description = collection["commentContent"];
+            commnet.CommentedBy = cookie.UserId;
+            commnet.CommentedAt = DateTime.Now;
+
+            context.Comments.AddObject(commnet);
+            context.SaveChanges();
 
             return RedirectToAction("/Home/Index");
         }

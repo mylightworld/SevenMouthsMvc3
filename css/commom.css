@@ -1,6 +1,10 @@
 ﻿.message{color:Red;}
 
-ul li{list-style:none;}
+/*******列表********/
+ul li{list-style-type:none;margin-right:15px;}
+
+/********按钮********/
+.button{width:45px;height:25px;background-color:#E6E6FA;cursor:pointer;color:#C71585;}
 
 /******头像********/
 .head-portrait{width:23px;height:23px;}
@@ -11,4 +15,4 @@ ul li{list-style:none;}
 .shares tfoot tr{background-color:#FFBBFF;}
 .shares tr td{width:10%;text-align:center;}
 .shares tr{height:30px;}
-.shares tr:nth-child(odd){background-color:#FFE4B5;}
+.shares tr:nth-child(odd){background-color:#F0F0F0;}

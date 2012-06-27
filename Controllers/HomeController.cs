@@ -9,9 +9,6 @@ namespace SevenMouths.Controllers
 {
     public class HomeController : BaseController
     {
-        //
-        // GET: /Home/
-
         public ActionResult Index()
         {
             List<Share> shares = context.Shares.ToList();

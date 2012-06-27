@@ -226,9 +226,11 @@
     <Content Include="js\jquery-1.6.2-vsdoc.js" />
     <Content Include="js\jquery-1.6.2.js" />
     <Content Include="js\jquery-1.6.2.min.js" />
+    <Content Include="js\jquery-1.7.js" />
     <Content Include="js\jquery-ui-1.8.11.js" />
     <Content Include="js\jquery-ui-1.8.11.min.js" />
     <Content Include="js\corner.js" />
+    <Content Include="js\share.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

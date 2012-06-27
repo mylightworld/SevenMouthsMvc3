@@ -1,7 +1,7 @@
 ﻿@using SevenMouths.Models
 @model List<Share>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "分享列表";
     SevenMouthsEntities context = new SevenMouthsEntities();
     User sharer;
     List<Comment> comments;
@@ -10,7 +10,13 @@
     int downCount;
 }
 
-<h2>Index</h2>
+<script type="text/javascript">
+    $("tr td").corner("10px");
+    $("textarea").corner("10px");
+    $(".button").corner("10px");
+</script>
+
+<h2>分享列表</h2>
 <div>
     <table class="shares">
 
@@ -44,25 +50,34 @@
                 <td><a href="/Shares/VoteToDown/@share.ShareId"><img src="/image/down.jpg" alt="" class="head-portrait"/>踩(@downCount)</a></td>
             </tr>
             <tr>
-            <td>
-                <table>
-                <tr>
-                    <td><img src="@sharer.MainPictureUrl" alt="" class="head-portrait"/>@sharer.Name</td>
-                    <td>@originComment.Description</td>
-                    <td>@originComment.CommentedAt</td>
-                </tr>
+            <td colspan="6">
+                <ul>
+                <li>
+                    <ul>
+                        <li style="float:left;"><img src="@sharer.MainPictureUrl" alt="" class="head-portrait"/>@sharer.Name</li>
+                        <li style="float:left;">@originComment.Description</li>
+                        <li style="float:left;">@originComment.CommentedAt</li>
+                    </ul>
+                </li>
                 @foreach (var comment in comments)
-                { 
-                    <tr>
-                        <td>
-                            
-                        </td>
-                        <td>
-                            
-                        </td>
-                    </tr>                
+                {
+                    User observer = context.Users.FirstOrDefault(x => x.UserId == comment.CommentedBy);
+                    <li>
+                        <ul>
+                            <li style="float:left;"><img src="@observer.MainPictureUrl" alt="" class="head-portrait"/>@observer.Name</li>
+                            <li style="float:left;">@comment.Description</li>
+                            <li style="float:left;">@comment.CommentedAt</li>
+                        </ul>
+                    </li>                
                 }
-                </table>
+                <li><a href="javascript:;" onclick="$(this).parent().siblings('.comments').toggle();">评论(@comments.Count)</a></li>
+                <li style="clear:both;display:none;" class="comments">
+                    <div>
+                    <textarea name="commentContent@(share.ShareId)" id="commentContent@(share.ShareId)" cols="50" rows="4"></textarea>
+                    </div>
+                    <div><input type="button" class="button" onclick="submitComment('@originComment.ShareId','@originComment.CommentId');" value="评论" /></div>
+                </li>
+                </ul>
             </td>
             </tr>
         }
