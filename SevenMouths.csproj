@@ -219,13 +219,16 @@
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="image\down.jpg" />
     <Content Include="image\duck.jpg" />
+    <Content Include="image\up.jpg" />
     <Content Include="js\commom.js" />
     <Content Include="js\jquery-1.6.2-vsdoc.js" />
     <Content Include="js\jquery-1.6.2.js" />
     <Content Include="js\jquery-1.6.2.min.js" />
     <Content Include="js\jquery-ui-1.8.11.js" />
     <Content Include="js\jquery-ui-1.8.11.min.js" />
+    <Content Include="js\corner.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

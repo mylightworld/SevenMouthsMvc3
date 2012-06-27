@@ -138,6 +138,21 @@ namespace SevenMouths.Models
             }
         }
         private Nullable<System.DateTime> _commentedAt;
+    
+        [DataMember]
+        public Nullable<bool> IsOriginal
+        {
+            get { return _isOriginal; }
+            set
+            {
+                if (_isOriginal != value)
+                {
+                    _isOriginal = value;
+                    OnPropertyChanged("IsOriginal");
+                }
+            }
+        }
+        private Nullable<bool> _isOriginal;
 
         #endregion
         #region Navigation Properties

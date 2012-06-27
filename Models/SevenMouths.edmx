@@ -66,6 +66,7 @@
           <Property Name="ParentId" Type="int" />
           <Property Name="Grade" Type="float" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsOriginal" Type="bit" />
           <Property Name="CommentedBy" Type="int" />
           <Property Name="CommentedAt" Type="datetime" />
         </EntityType>
@@ -311,6 +312,7 @@
           <Property Name="CommentedBy" Type="Int32" />
           <Property Name="CommentedAt" Type="DateTime" />
           <NavigationProperty Name="Share" Relationship="SevenMouths.FK_Comments_Shares" FromRole="Comments" ToRole="Shares" />
+          <Property Type="Boolean" Name="IsOriginal" />
         </EntityType>
         <EntityType Name="Cosite">
           <Key>
@@ -487,7 +489,8 @@
             <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Comments"><EntityTypeMapping TypeName="SevenMouths.Comment"><MappingFragment StoreEntitySet="Comments">
-            <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+            <ScalarProperty Name="IsOriginal" ColumnName="IsOriginal" />
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
             <ScalarProperty Name="ShareId" ColumnName="ShareId" />
             <ScalarProperty Name="ParentId" ColumnName="ParentId" />
             <ScalarProperty Name="Grade" ColumnName="Grade" />

@@ -5,12 +5,15 @@
     SevenMouthsEntities context = new SevenMouthsEntities();
     User sharer;
     List<Comment> comments;
-    
+    Comment originComment;
+    int upCount;
+    int downCount;
 }
 
 <h2>Index</h2>
 <div>
-    <table>
+    <table class="shares">
+
     <thead>
         <tr>
             <td>编号</td>
@@ -18,12 +21,18 @@
             <td>分类</td>
             <td>分享者</td>
             <td>时间</td>
+            <td>顶</td>
+            <td>踩</td>
         </tr>
     </thead>
+    <tbody>
         @foreach (var share in Model)
         { 
             sharer = context.Users.FirstOrDefault(x => x.UserId == share.SharedBy);
-            comments = context.Comments.Where(x => x.ShareId == share.ShareId).ToList();
+            originComment = context.Comments.FirstOrDefault(x => x.IsOriginal.Value);
+            comments = context.Comments.Where(x => x.ShareId.Value == share.ShareId && !x.IsOriginal.Value).ToList();
+            upCount = context.Votes.Count(x => x.ShareId == share.ShareId && x.Value > 0);
+            downCount = context.Votes.Count(x => x.ShareId == share.ShareId && x.Value < 0);
             <tr>
                 <td>@share.ShareNum</td>
                 <td><a href ="@share.Url">@share.Title</a></td>
@@ -31,9 +40,34 @@
                 
                 <td><img src="@sharer.MainPictureUrl" alt="" class="head-portrait"/>@sharer.Name</td>
                 <td>@share.SharedAt</td>
+                <td><a href="/Shares/VoteToUp/@share.ShareId"><img src="/image/up.jpg" alt="" class="head-portrait"/>顶(@upCount)</a></td>
+                <td><a href="/Shares/VoteToDown/@share.ShareId"><img src="/image/down.jpg" alt="" class="head-portrait"/>踩(@downCount)</a></td>
             </tr>
-            <tr></tr>
+            <tr>
+            <td>
+                <table>
+                <tr>
+                    <td><img src="@sharer.MainPictureUrl" alt="" class="head-portrait"/>@sharer.Name</td>
+                    <td>@originComment.Description</td>
+                    <td>@originComment.CommentedAt</td>
+                </tr>
+                @foreach (var comment in comments)
+                { 
+                    <tr>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>                
+                }
+                </table>
+            </td>
+            </tr>
         }
+     </tbody>
+
      <tfoot>
         <tr>
             <td>编号</td>
@@ -41,6 +75,8 @@
             <td>分类</td>
             <td>分享者</td>
             <td>时间</td>
+            <td>顶</td>
+            <td>踩</td>
         </tr>
     </tfoot>
     </table>

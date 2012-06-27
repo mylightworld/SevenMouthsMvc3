@@ -4,3 +4,11 @@ ul li{list-style:none;}
 
 /******头像********/
 .head-portrait{width:23px;height:23px;}
+
+
+/*******分享表格********/
+.shares thead tr{background-color:#FFBBFF;}
+.shares tfoot tr{background-color:#FFBBFF;}
+.shares tr td{width:10%;text-align:center;}
+.shares tr{height:30px;}
+.shares tr:nth-child(odd){background-color:#FFE4B5;}
