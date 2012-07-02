@@ -1,0 +1,6 @@
+﻿/*******分享表格********/
+.shares thead tr{background-color:#7EC0EE;font-weight:bold;}
+.shares tfoot tr{background-color:#7EC0EE;font-weight:bold;}
+.shares tr td{width:10%;text-align:center;}
+.shares tr{height:30px;}
+.shares tbody tr:nth-child(odd){background-color:#F0F0F0;}

@@ -15,14 +15,13 @@ namespace SevenMouths.Controllers
         }
 
         //顶
-        [HttpPost]
-        public ActionResult VoteToUp(int shareId)
+        public ActionResult VoteToUp(int id)//id为shareId
         {
-            Share share = context.Shares.FirstOrDefault(x => x.ShareId == shareId);
+            Share share = context.Shares.FirstOrDefault(x => x.ShareId == id);
             if (share != null)
             {
                 Vote vote = new Vote();
-                vote.ShareId = shareId;
+                vote.ShareId = id;
                 vote.Value = 1;
                 vote.VotedBy = cookie.UserId;
                 vote.VotedAt = System.DateTime.Now;
@@ -30,18 +29,18 @@ namespace SevenMouths.Controllers
                 context.SaveChanges();
             }
 
-            return RedirectToAction("/Home/Index");
+            var dataReturn = new { upCounts = context.Votes.Count(x => x.Value > 0) };
+            return Json(dataReturn);
         }
 
         //踩
-        [HttpPost]
-        public ActionResult VoteToDown(int shareId)
+        public ActionResult VoteToDown(int id)//id为shareId
         {
-            Share share = context.Shares.FirstOrDefault(x => x.ShareId == shareId);
+            Share share = context.Shares.FirstOrDefault(x => x.ShareId == id);
             if (share != null)
             {
                 Vote vote = new Vote();
-                vote.ShareId = shareId;
+                vote.ShareId = id;
                 vote.Value = -1;
                 vote.VotedBy = cookie.UserId;
                 vote.VotedAt = System.DateTime.Now;
@@ -49,7 +48,8 @@ namespace SevenMouths.Controllers
                 context.SaveChanges();
             }
 
-            return RedirectToAction("/Home/Index");
+            var dataReturn = new { downCounts = context.Votes.Count(x => x.Value <0) };
+            return Json(dataReturn);
         }
 
         //提交评论
@@ -63,13 +63,24 @@ namespace SevenMouths.Controllers
             commnet.ShareId = shareId;
             commnet.ParentId = parentId;
             commnet.Description = collection["commentContent"];
+            commnet.IsOriginal = false;
             commnet.CommentedBy = cookie.UserId;
             commnet.CommentedAt = DateTime.Now;
 
-            context.Comments.AddObject(commnet);
-            context.SaveChanges();
+            //调试
+            try
+            {
 
-            return RedirectToAction("/Home/Index");
+                context.Comments.AddObject(commnet);
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw (e.InnerException);
+            }
+
+            var share = context.Shares.FirstOrDefault(x => x.ShareId == shareId);
+            return View("_Comments",share);
         }
 
     }

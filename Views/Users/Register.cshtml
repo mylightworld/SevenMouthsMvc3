@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "注册账号";
+}
+
+<script type="text/javascript">
+    $(".register").corner("10px");
+</script>
+
+<form action="" method="post" id="registerForm" onsubmit="return validateReigster();">
+    <div class="register">
+        <div>用户注册</div>
+        <hr color="#F08080"/>
+        <div>
+            <ul>
+                <li><span class="label-item">邮箱或用户名：</span><input type="text" name="emailOrName" id="emailOrName" class="text-item"/></li>
+                <li><span class="label-item">密码：</span><input type="password" name="password" id="password" class="text-item"/></li>
+                <li><span class="label-item">密码重复：</span><input type="password" name="pwdConfirm" id="pwdConfirm" class="text-item"/></li>
+                <li><span class="label-item">记住我：</span><input type="checkbox" name="rememberMe" id="rememberMe" /></li>
+                <li><input type="submit" class="button" value="提交" style="position:relative;margin-left:45%;"/></li>
+                <li style="position:relative;margin-left:32%;"><div class="message">@ViewBag.message</div></li>
+            </ul>
+        </div>
+        
+    </div>
+</form>
+

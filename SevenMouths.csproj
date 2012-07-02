@@ -38,6 +38,14 @@
       <HintPath>..\..\libs\mvc3Need\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="QzoneSDK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ef7dce604f21347b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\QzoneSDK.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity">
       <Private>False</Private>
     </Reference>
@@ -202,7 +210,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\commom.css" />
-    <Content Include="css\main.css" />
+    <Content Include="css\Share.css" />
+    <Content Include="css\User.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\jquery-ui.css" />
@@ -219,8 +228,12 @@
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="image\closeOrDelete.jpg" />
     <Content Include="image\down.jpg" />
     <Content Include="image\duck.jpg" />
+    <Content Include="image\idonothave.jpg" />
+    <Content Include="image\ihave.jpg" />
+    <Content Include="image\qq2.jpg" />
     <Content Include="image\up.jpg" />
     <Content Include="js\commom.js" />
     <Content Include="js\jquery-1.6.2-vsdoc.js" />
@@ -231,6 +244,7 @@
     <Content Include="js\jquery-ui-1.8.11.min.js" />
     <Content Include="js\corner.js" />
     <Content Include="js\share.js" />
+    <Content Include="js\user.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -288,6 +302,12 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SevenMouths.cs</LastGenOutput>
     </None>
+    <Content Include="App_Code\SharesHelper.cshtml" />
+    <Content Include="Views\Shared\_Shares.cshtml" />
+    <Content Include="Views\Users\Detail.cshtml" />
+    <Content Include="Views\Shared\_Comments.cshtml" />
+    <Content Include="Views\Users\OnLoginQZone.cshtml" />
+    <Content Include="Views\Users\Register.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

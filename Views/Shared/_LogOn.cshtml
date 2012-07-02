@@ -2,10 +2,23 @@
 @using SevenMouths.Helpers
 @{
     CookieHelper cookie = new CookieHelper();
-    String userName = "";
+    User user;
     using(SevenMouthsEntities context = new SevenMouthsEntities())
     {
-        context.users.FirstOrDefault(x => x.UserId == 
+        user = context.Users.FirstOrDefault(x => x.UserId == cookie.UserId);
     }
     
   }
+
+
+  <span>
+  @if (cookie.IsLogin)
+  { 
+    <b><span><a href="/Users/Detail/@user.UserId">@SharesHelper.UserBlock(user.UserId,user.Name,user.MainPictureUrl)</a><a href="/Users/LogOut">[退出]</a>|</span></b>
+  }
+  else
+  {
+    <b><span><a href="/Users/Login">登录</a></span>|</b>
+  }
+  <b><span>|<a href="/Users/Register">注册</a></span></b>
+  </span>

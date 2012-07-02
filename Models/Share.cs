@@ -137,21 +137,39 @@ namespace SevenMouths.Models
         #region Navigation Properties
     
         [DataMember]
-        public Comment Comment
+        public TrackableCollection<Comment> Comments
         {
-            get { return _comment; }
+            get
+            {
+                if (_comments == null)
+                {
+                    _comments = new TrackableCollection<Comment>();
+                    _comments.CollectionChanged += FixupComments;
+                }
+                return _comments;
+            }
             set
             {
-                if (!ReferenceEquals(_comment, value))
+                if (!ReferenceEquals(_comments, value))
                 {
-                    var previousValue = _comment;
-                    _comment = value;
-                    FixupComment(previousValue);
-                    OnNavigationPropertyChanged("Comment");
+                    if (ChangeTracker.ChangeTrackingEnabled)
+                    {
+                        throw new InvalidOperationException("Cannot set the FixupChangeTrackingCollection when ChangeTracking is enabled");
+                    }
+                    if (_comments != null)
+                    {
+                        _comments.CollectionChanged -= FixupComments;
+                    }
+                    _comments = value;
+                    if (_comments != null)
+                    {
+                        _comments.CollectionChanged += FixupComments;
+                    }
+                    OnNavigationPropertyChanged("Comments");
                 }
             }
         }
-        private Comment _comment;
+        private TrackableCollection<Comment> _comments;
     
         [DataMember]
         public TrackableCollection<Vote> Votes
@@ -266,62 +284,48 @@ namespace SevenMouths.Models
     
         protected virtual void ClearNavigationProperties()
         {
-            Comment = null;
+            Comments.Clear();
             Votes.Clear();
         }
 
         #endregion
         #region Association Fixup
     
-        private void FixupComment(Comment previousValue)
+        private void FixupComments(object sender, NotifyCollectionChangedEventArgs e)
         {
-            // This is the principal end in an association that performs cascade deletes.
-            // Update the event listener to refer to the new dependent.
-            if (previousValue != null)
-            {
-                ChangeTracker.ObjectStateChanging -= previousValue.HandleCascadeDelete;
-            }
-    
-            if (Comment != null)
-            {
-                ChangeTracker.ObjectStateChanging += Comment.HandleCascadeDelete;
-            }
-    
             if (IsDeserializing)
             {
                 return;
             }
     
-            if (previousValue != null && ReferenceEquals(previousValue.Share, this))
+            if (e.NewItems != null)
             {
-                previousValue.Share = null;
-            }
-    
-            if (Comment != null)
-            {
-                Comment.Share = this;
-            }
-    
-            if (ChangeTracker.ChangeTrackingEnabled)
-            {
-                if (ChangeTracker.OriginalValues.ContainsKey("Comment")
-                    && (ChangeTracker.OriginalValues["Comment"] == Comment))
+                foreach (Comment item in e.NewItems)
                 {
-                    ChangeTracker.OriginalValues.Remove("Comment");
-                }
-                else
-                {
-                    ChangeTracker.RecordOriginalValue("Comment", previousValue);
-                    // This is the principal end of an identifying association, so the dependent must be deleted when the relationship is removed.
-                    // If the current state of the dependent is Added, the relationship can be changed without causing the dependent to be deleted.
-                    if (previousValue != null && previousValue.ChangeTracker.State != ObjectState.Added)
+                    item.Share = this;
+                    if (ChangeTracker.ChangeTrackingEnabled)
                     {
-                        previousValue.MarkAsDeleted();
+                        if (!item.ChangeTracker.ChangeTrackingEnabled)
+                        {
+                            item.StartTracking();
+                        }
+                        ChangeTracker.RecordAdditionToCollectionProperties("Comments", item);
                     }
                 }
-                if (Comment != null && !Comment.ChangeTracker.ChangeTrackingEnabled)
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Comment item in e.OldItems)
                 {
-                    Comment.StartTracking();
+                    if (ReferenceEquals(item.Share, this))
+                    {
+                        item.Share = null;
+                    }
+                    if (ChangeTracker.ChangeTrackingEnabled)
+                    {
+                        ChangeTracker.RecordRemovalFromCollectionProperties("Comments", item);
+                    }
                 }
             }
         }

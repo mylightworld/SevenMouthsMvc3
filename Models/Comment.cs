@@ -35,13 +35,6 @@ namespace SevenMouths.Models
                     {
                         throw new InvalidOperationException("The property 'CommentId' is part of the object's key and cannot be changed. Changes to key properties can only be made when the object is not being tracked or is in the Added state.");
                     }
-                    if (!IsDeserializing)
-                    {
-                        if (Share != null && Share.ShareId != value)
-                        {
-                            Share = null;
-                        }
-                    }
                     _commentId = value;
                     OnPropertyChanged("CommentId");
                 }
@@ -57,6 +50,14 @@ namespace SevenMouths.Models
             {
                 if (_shareId != value)
                 {
+                    ChangeTracker.RecordOriginalValue("ShareId", _shareId);
+                    if (!IsDeserializing)
+                    {
+                        if (Share != null && Share.ShareId != value)
+                        {
+                            Share = null;
+                        }
+                    }
                     _shareId = value;
                     OnPropertyChanged("ShareId");
                 }
@@ -110,6 +111,21 @@ namespace SevenMouths.Models
         private string _description;
     
         [DataMember]
+        public Nullable<bool> IsOriginal
+        {
+            get { return _isOriginal; }
+            set
+            {
+                if (_isOriginal != value)
+                {
+                    _isOriginal = value;
+                    OnPropertyChanged("IsOriginal");
+                }
+            }
+        }
+        private Nullable<bool> _isOriginal;
+    
+        [DataMember]
         public Nullable<int> CommentedBy
         {
             get { return _commentedBy; }
@@ -138,21 +154,6 @@ namespace SevenMouths.Models
             }
         }
         private Nullable<System.DateTime> _commentedAt;
-    
-        [DataMember]
-        public Nullable<bool> IsOriginal
-        {
-            get { return _isOriginal; }
-            set
-            {
-                if (_isOriginal != value)
-                {
-                    _isOriginal = value;
-                    OnPropertyChanged("IsOriginal");
-                }
-            }
-        }
-        private Nullable<bool> _isOriginal;
 
         #endregion
         #region Navigation Properties
@@ -165,15 +166,6 @@ namespace SevenMouths.Models
             {
                 if (!ReferenceEquals(_share, value))
                 {
-                    if (ChangeTracker.ChangeTrackingEnabled && ChangeTracker.State != ObjectState.Added && value != null)
-                    {
-                        // This the dependent end of an identifying relationship, so the principal end cannot be changed if it is already set,
-                        // otherwise it can only be set to an entity with a primary key that is the same value as the dependent's foreign key.
-                        if (CommentId != value.ShareId)
-                        {
-                            throw new InvalidOperationException("The principal end of an identifying relationship can only be changed when the dependent end is in the Added state.");
-                        }
-                    }
                     var previousValue = _share;
                     _share = value;
                     FixupShare(previousValue);
@@ -244,16 +236,6 @@ namespace SevenMouths.Models
             }
         }
     
-        // This entity type is the dependent end in at least one association that performs cascade deletes.
-        // This event handler will process notifications that occur when the principal end is deleted.
-        internal void HandleCascadeDelete(object sender, ObjectStateChangingEventArgs e)
-        {
-            if (e.NewState == ObjectState.Deleted)
-            {
-                this.MarkAsDeleted();
-            }
-        }
-    
         protected bool IsDeserializing { get; private set; }
     
         [OnDeserializing]
@@ -277,22 +259,30 @@ namespace SevenMouths.Models
         #endregion
         #region Association Fixup
     
-        private void FixupShare(Share previousValue)
+        private void FixupShare(Share previousValue, bool skipKeys = false)
         {
             if (IsDeserializing)
             {
                 return;
             }
     
-            if (previousValue != null && ReferenceEquals(previousValue.Comment, this))
+            if (previousValue != null && previousValue.Comments.Contains(this))
             {
-                previousValue.Comment = null;
+                previousValue.Comments.Remove(this);
             }
     
             if (Share != null)
             {
-                Share.Comment = this;
-                CommentId = Share.ShareId;
+                if (!Share.Comments.Contains(this))
+                {
+                    Share.Comments.Add(this);
+                }
+    
+                ShareId = Share.ShareId;
+            }
+            else if (!skipKeys)
+            {
+                ShareId = null;
             }
     
             if (ChangeTracker.ChangeTrackingEnabled)

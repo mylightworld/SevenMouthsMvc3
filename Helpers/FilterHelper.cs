@@ -12,23 +12,14 @@ namespace SevenMouths.Helpers
     }
 
     //对是否登录进行过滤
-    public class LoginFilter : FilterAttribute,IActionFilter
+    public class LoginFilter : ActionFilterAttribute
     {
-        public void OnActionExecuted(ActionExecutedContext filterContext)
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             CookieHelper cookie = new CookieHelper();
             if (cookie.IsLogin)
             {
-                filterContext.RequestContext.HttpContext.Response.Redirect("/Home/Index");
-            }
-        }
-
-        public void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            CookieHelper cookie = new CookieHelper();
-            if (cookie.IsLogin)
-            {
-                filterContext.RequestContext.HttpContext.Response.Redirect("/Home/Index");
+               filterContext.Result = new RedirectResult("/Home/Index");
             }
         }
     }

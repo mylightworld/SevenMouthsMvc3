@@ -1,18 +1,30 @@
 ﻿.message{color:Red;}
 
+body{font-size:14px;}
+
 /*******列表********/
-ul li{list-style-type:none;margin-right:15px;}
+ul li{list-style-type:none;margin-right:15px;height:17px;}
 
 /********按钮********/
 .button{width:45px;height:25px;background-color:#E6E6FA;cursor:pointer;color:#C71585;}
 
 /******头像********/
-.head-portrait{width:23px;height:23px;}
+.head-portrait{width:15px;height:15px;cursor:pointer;}
+/*********普通图标*******/
+.icon{width:17px;height:17px;cursor:pointer;}
+
+.timestamp{color:#8DB6CD;}
 
 
-/*******分享表格********/
-.shares thead tr{background-color:#FFBBFF;}
-.shares tfoot tr{background-color:#FFBBFF;}
-.shares tr td{width:10%;text-align:center;}
-.shares tr{height:30px;}
-.shares tr:nth-child(odd){background-color:#F0F0F0;}
+/*********评论************/
+.comment-now{margin-left:45%;width:400px;border:2px solid #F0F0F0;padding-left:0px;padding-top:0px;padding-right:0px;padding-bottom:3px;background-color:#FFEC8B;}
+
+/********验证**********/
+.illegal{border:2px solid #FF0000;}
+
+/********登录状态*******/
+.log-on{float:right;margin-top:5px;margin-right:100px;clear:both;margin-bottom:20px;}
+
+/**********条目对齐方式********/
+.label-item{text-align:right;float:left;width:150px;}
+.text-item{text-align:left;width:200px;}

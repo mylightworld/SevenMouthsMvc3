@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "OnLoginQZone";
+}
+
+<form action="/Users/OnLoginQZone" method="post" id="qZoneForm" onsubmit="">
+    <div>
+        <div>
+            您好，@(ViewBag.name)欢迎来到七嘴八舌，是否已经有七嘴八舌账号？
+            <div>
+                <img src="/image/ihave.jpg" alt="/image/ihave.jpg" title="有" style="width:20px;height:20px;" onclick="$('i-have').show();$('i-have').hide();"/><img src="/image/idonothave.jpg" alt="" title="木有" style="width:20px;height:20px;" onclick="onclick="$('i-dont-have').show();$('i-dont-have').hide();""/>
+            </div>
+            <div class="i-have">
+                <ul>
+                    <li>
+                        邮箱或用户名：<input type="text" name="emailOrName" />
+                    </li>
+                    <li>
+                        密码：<input type="password" name="pwdLogin" id="pwdLogin" />
+                    </li>
+                </ul>
+            </div>
+            <div class="i-dont-have">
+                <ul>
+                    <li>昵称：<input type="text" name="name" id="name" value="@ViewBag.name"/></li>
+                    <li>邮箱：<input type="text" name="email" id="email" value="@ViewBag.email" /></li>
+                    <li>密码：<input type="password" name="pwdRegister" id="pwdRegister" /></li>
+                    <li>重复输入密码：<input type="password" name="pwdRegisterConfirm" id="pwdRegisterConfirm" /></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</form>
+

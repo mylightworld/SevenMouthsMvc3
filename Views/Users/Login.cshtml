@@ -1,17 +1,29 @@
 ﻿@{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "登录";
     Layout = "../Shared/_Layout.cshtml";
 }
 
-<h2>Login</h2>
+<script type="text/javascript">
+    $(".login").corner("10px");
+</script>
 
 <form action="/Users/Login" method="post">
-    <div>
-        <ul>
-            <li>邮箱或用户名：<input type="text" name="emailOrName" id="emailOrName" /></li>
-            <li>密码：<input type="password" name="password" id="password" /></li>
-            <li><input type="submit" value="登录" /></li>
-        </ul>
-        <div class="message">@ViewBag.message</div>
+    <div class="login">
+        <div>帐号登录</div>
+        <hr />
+        <div style="margin-bottom:10px;">
+            <ul>
+                <li><span class="label-item">邮箱或用户名：</span><input type="text" name="emailOrName" id="emailOrName" class="text-item"/></li>
+                <li><span class="label-item">密码：</span><input type="password" name="password" id="password" class="text-item"/></li>
+                <li><input type="submit" class="button" value="登录" style="position:relative;margin-left:37%;margin-top:15px;"/></li>
+            </ul>
+            <div class="message">@ViewBag.message</div>
+        </div>
+        <div style="margin-left:57%;">
+            <div>使用现有帐号登录？</div>
+            <ul>
+                <li><a href="/Users/LoginQZone" title="使用QQ号登录"><img src="/image/qq2.jpg" alt="" style="width:30px;heigt:30px;"/></a></li>
+            </ul>
+        </div>
     </div>
 </form>

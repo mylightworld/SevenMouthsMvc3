@@ -5,6 +5,7 @@ using System.Web;
 using SevenMouths.Helpers;
 using SevenMouths.Models;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace SevenMouths.Helpers
 {
@@ -19,6 +20,27 @@ namespace SevenMouths.Helpers
 
             Random random = new Random();
             return random.Next(numMin, numMax);
+        }
+
+        //正则表达示验证邮箱格式
+        public static bool CheckEmail(string email)
+        {
+            Regex emailRegex = new Regex("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$");
+            if (string.IsNullOrEmpty(email))
+            {
+                return false;
+            }
+            else
+            {
+                if (emailRegex.IsMatch(email))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
     }

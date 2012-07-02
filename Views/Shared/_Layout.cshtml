@@ -5,15 +5,23 @@
     <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     <link href="/css/commom.css" rel="stylesheet" type="text/css" />
-    <link href="/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/css/Share.css" rel="stylesheet" type="text/css" />
+    <link href="/css/User.css" rel="stylesheet" type="text/css" />
     <script src="/js/jquery-1.7.js" type="text/javascript"></script>
     <script src="/js/commom.js" type="text/javascript"></script>
     <script src="/js/corner.js" type="text/javascript"></script>
     <script src="/js/share.js" type="text/javascript"></script>
+    <script src="/js/user.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(".button").corner("10px");
+    </script>
 </head>
 
 <body>
 
+    <div class="log-on">@Html.Partial("_LogOn")</div>
+    
     <div>
         @RenderBody()
     </div>

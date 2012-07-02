@@ -1,0 +1,54 @@
+﻿@using SevenMouths.Models
+@model Share
+@{
+    SevenMouthsEntities context = new SevenMouthsEntities();
+    Comment originComment = context.Comments.FirstOrDefault(x => x.ShareId == Model.ShareId &&x.IsOriginal.Value);
+    List<Comment> comments = context.Comments.Where(x => x.ShareId.Value == Model.ShareId && !x.IsOriginal.Value).ToList();
+    User sharer = context.Users.FirstOrDefault(x => x.UserId == Model.SharedBy);
+    
+ }
+
+ <script type="text/javascript">
+     $(document).ready(function () {
+
+         $("tr td").corner("10px");
+         $("textarea").corner("10px");
+         $(".button").corner("10px");
+         $(".comment-now").corner("10px");
+
+     });
+    
+</script>
+
+<li>
+    <ul>
+        <li style="float:left;">@SharesHelper.UserBlock(sharer.UserId, sharer.Name, sharer.MainPictureUrl)</li>
+        <li style="float:left;">@originComment.Description</li>
+        <li style="float:left;" class="timestamp">@originComment.CommentedAt</li>
+    </ul>
+    <a href="javascript:;" onclick="$(this).parent().siblings('.comments').toggle();">评论(@(comments.Count+1))</a>
+</li>
+
+@foreach (var comment in comments)
+{
+    User observer = context.Users.FirstOrDefault(x => x.UserId == comment.CommentedBy);
+    <li style="clear:both;margin-top:10px;margin-bottom:5px;">
+        <ul>
+            <li style="float:left;">@SharesHelper.UserBlock(observer.UserId, observer.Name, observer.MainPictureUrl)</li>
+            <li style="float:left;">@comment.Description</li>
+            <li style="float:left;" class="timestamp">@comment.CommentedAt</li>
+        </ul>
+    </li>                
+}
+
+<li style="clear:both;display:none;position:relative;z-index:1000;" class="comments">
+    <div class="comment-now">
+    <div style="float:left;margin-left:43%;margin-top:5px;margin-bottom:5px;font-weight:bold;">我要评论</div>
+    <div style="margin-left:375px;position:relative;z-index:1001;margin-top:3px;"><img src="/image/closeOrDelete.jpg" alt="" class="icon" onclick="$('.comments').toggle();" title="关闭" /></div>
+    <div>
+        <textarea name="commentContent@(Model.ShareId)" id="commentContent@(Model.ShareId)" cols="50" rows="4"></textarea>
+    </div>
+    <div><input type="button" class="button" onclick="submitComment('@originComment.ShareId','@originComment.CommentId',$(this));" value="评论" /></div>
+    </div>
+</li>
+
