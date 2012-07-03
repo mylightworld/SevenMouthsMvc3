@@ -3,3 +3,8 @@
 {
     <a href="/Users/Detail/@userId"><img src="@picUrl" alt="" class="head-portrait"/>@userName</a>    
 }
+
+@helper MySharesBlock(int userId,string userName,string picUrl)
+{
+   <a href="/Shares/Index"><img src="@picUrl" alt="" class="head-portrait"/>@userName</a>       
+}

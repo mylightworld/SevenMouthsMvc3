@@ -14,11 +14,12 @@
   <span>
   @if (cookie.IsLogin)
   { 
-    <b><span><a href="/Users/Detail/@user.UserId">@SharesHelper.UserBlock(user.UserId,user.Name,user.MainPictureUrl)</a><a href="/Users/LogOut">[退出]</a>|</span></b>
+    <b><span><a href="/Shares/Index/@user.UserId">@SharesHelper.MySharesBlock(user.UserId, user.Name, user.MainPictureUrl)</a><a href="/Users/LogOut">[退出]</a>|</span></b>
   }
   else
   {
     <b><span><a href="/Users/Login">登录</a></span>|</b>
   }
-  <b><span>|<a href="/Users/Register">注册</a></span></b>
+  <b><span><a href="/Users/Register">注册</a></span>|</b>
+  <b><span><a href="/Shares/Index">偶要分享</a></span></b>
   </span>

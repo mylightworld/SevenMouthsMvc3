@@ -308,6 +308,8 @@
     <Content Include="Views\Shared\_Comments.cshtml" />
     <Content Include="Views\Users\OnLoginQZone.cshtml" />
     <Content Include="Views\Users\Register.cshtml" />
+    <Content Include="Views\Shares\Add.cshtml" />
+    <Content Include="Views\Shares\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

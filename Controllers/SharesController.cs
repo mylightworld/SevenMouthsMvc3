@@ -83,5 +83,17 @@ namespace SevenMouths.Controllers
             return View("_Comments",share);
         }
 
+        public ActionResult Add()
+        {
+            ViewBag.categories = context.Categories.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add(FormCollection collection)
+        {
+
+            return Redirect("/Home/Index");
+        }
     }
 }

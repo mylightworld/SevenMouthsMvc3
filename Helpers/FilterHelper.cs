@@ -19,7 +19,11 @@ namespace SevenMouths.Helpers
             CookieHelper cookie = new CookieHelper();
             if (cookie.IsLogin)
             {
-               filterContext.Result = new RedirectResult("/Home/Index");
+                filterContext.Result = new RedirectResult("/Home/Index");
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("/Users/Login");
             }
         }
     }

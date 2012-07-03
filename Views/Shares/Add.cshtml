@@ -1,0 +1,28 @@
+﻿@using SevenMouths.Models
+@{
+    ViewBag.Title = "添加分享";
+}
+
+<h2>添加分享</h2>
+
+<form action="/Shares/Add" method="post" id="addShareForm" onsubmit="">
+    <div>
+        <fieldset>
+            <legend>添加分享</legend>
+            <div>
+                <ul>
+                    <li><span>分享名：</span><input type="text" name="title" id="title" /></li>
+                    <li><span>类别：</span>
+                    <select name="category" id="category">
+                    @foreach (var category in ViewBag.categories as List<Category>)
+                    { 
+                        <option value="@category.Name">@category.Description</option>
+                    }
+                    </select>
+                    </li>
+                </ul>
+            </div>
+        </fieldset>
+    </div>
+</form>
+
