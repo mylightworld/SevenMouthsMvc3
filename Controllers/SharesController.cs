@@ -82,6 +82,5 @@ namespace SevenMouths.Controllers
             var share = context.Shares.FirstOrDefault(x => x.ShareId == shareId);
             return View("_Comments",share);
         }
-
     }
 }

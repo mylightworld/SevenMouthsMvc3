@@ -4,7 +4,6 @@
     ViewBag.Title = "分享列表";
     SevenMouthsEntities context = new SevenMouthsEntities();
 }
-
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -15,17 +14,31 @@
     });
     
 </script>
-
+<a href='@Url.Action("Index", "Post")'>New Post</a>
 <table class="shares">
     <thead>
         <tr>
-            <td>编号</td>
-            <td>标题</td>
-            <td>分类</td>
-            <td>分享者</td>
-            <td>时间</td>
-            <td>顶</td>
-            <td>踩</td>
+            <td>
+                编号
+            </td>
+            <td>
+                标题
+            </td>
+            <td>
+                分类
+            </td>
+            <td>
+                分享者
+            </td>
+            <td>
+                时间
+            </td>
+            <td>
+                顶
+            </td>
+            <td>
+                踩
+            </td>
         </tr>
     </thead>
     <tbody>
@@ -34,35 +47,39 @@
             User sharer = context.Users.FirstOrDefault(x => x.UserId == share.SharedBy);
             int upCount = context.Votes.Count(x => x.ShareId == share.ShareId && x.Value > 0);
             int downCount = context.Votes.Count(x => x.ShareId == share.ShareId && x.Value < 0);
+            //计算评论的条数
+            int comment = context.Comments.Count(x => x.ShareId == share.ShareId);
             <tr>
-                <td>@share.ShareNum</td>
-                <td><a href ="@share.Url">@share.Title</a></td>
-                <td></td>
-                
-                <td>@SharesHelper.UserBlock(sharer.UserId, sharer.Name, sharer.MainPictureUrl)</td>
-                <td>@share.SharedAt</td>
-                <td><a href="javascript:;" onclick="voteToUp(@share.ShareId,$(this));"><img src="/image/up.jpg" alt="" class="head-portrait"/>顶(<span class="upCounts">@upCount</span>)</a></td>
-                <td><a href="javascript:;" onclick="voteToDown(@share.ShareId,$(this));"><img src="/image/down.jpg" alt="" class="head-portrait"/>踩(<span class="downCounts">@downCount</span>)</a></td>
+                <td>@share.ShareNum
+                </td>
+                <td>
+                    <a href ="@share.Url">@share.Title</a>
+                </td>
+                <td>
+                </td>
+                <td>@SharesHelper.UserBlock(sharer.UserId, sharer.Name, sharer.MainPictureUrl)
+                </td>
+                <td>@share.SharedAt
+                </td>
+                <td>
+                    <a href="javascript:;" onclick="voteToUp(@share.ShareId,$(this));">
+                        <img src="/image/up.jpg" alt="" class="head-portrait" />顶(<span class="upCounts">@upCount</span>)</a>
+                </td>
+                <td>
+                    <a href="javascript:;" onclick="voteToDown(@share.ShareId,$(this));">
+                        <img src="/image/down.jpg" alt="" class="head-portrait" />踩(<span class="downCounts">@downCount</span>)</a>
+                </td>
             </tr>
             <tr>
-            <td colspan="6">
-                <ul>
-                    @Html.Partial("_Comments",share)
-                </ul>
-            </td>
+                <td colspan="6">
+                    <ul>
+                        @if (comment != 0)
+                        {
+                            @Html.Partial("_Comments", share)
+                        }
+                    </ul>
+                </td>
             </tr>
         }
-     </tbody>
-
-     <tfoot>
-        <tr>
-            <td>编号</td>
-            <td>标题</td>
-            <td>分类</td>
-            <td>分享者</td>
-            <td>时间</td>
-            <td>顶</td>
-            <td>踩</td>
-        </tr>
-    </tfoot>
-    </table>
+    </tbody>
+</table>

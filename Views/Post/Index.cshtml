@@ -1,0 +1,73 @@
+﻿@model SevenMouths.Models.Share
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Share</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ShareNum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ShareNum)
+            @Html.ValidationMessageFor(model => model.ShareNum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SharedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SharedBy)
+            @Html.ValidationMessageFor(model => model.SharedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SharedAt)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SharedAt)
+            @Html.ValidationMessageFor(model => model.SharedAt)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Url)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Url)
+            @Html.ValidationMessageFor(model => model.Url)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
