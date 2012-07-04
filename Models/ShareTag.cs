@@ -18,7 +18,7 @@ using System.Runtime.Serialization;
 namespace SevenMouths.Models
 {
     [DataContract(IsReference = true)]
-    public partial class ShareCategory: IObjectWithChangeTracker, INotifyPropertyChanged
+    public partial class ShareTag: IObjectWithChangeTracker, INotifyPropertyChanged
     {
         #region Primitive Properties
     
@@ -42,19 +42,19 @@ namespace SevenMouths.Models
         private int _shareId;
     
         [DataMember]
-        public Nullable<int> CategoryId
+        public Nullable<int> TagId
         {
-            get { return _categoryId; }
+            get { return _tagId; }
             set
             {
-                if (_categoryId != value)
+                if (_tagId != value)
                 {
-                    _categoryId = value;
-                    OnPropertyChanged("CategoryId");
+                    _tagId = value;
+                    OnPropertyChanged("TagId");
                 }
             }
         }
-        private Nullable<int> _categoryId;
+        private Nullable<int> _tagId;
     
         [DataMember]
         public string Description

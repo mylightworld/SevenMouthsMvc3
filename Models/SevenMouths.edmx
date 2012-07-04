@@ -20,10 +20,11 @@
           <EntitySet Name="CoSiteUsers" EntityType="SevenMouths.Store.CoSiteUsers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Pictures" EntityType="SevenMouths.Store.Pictures" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Roles" EntityType="SevenMouths.Store.Roles" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ShareCategories" EntityType="SevenMouths.Store.ShareCategories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SharePictures" EntityType="SevenMouths.Store.SharePictures" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Shares" EntityType="SevenMouths.Store.Shares" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ShareTags" EntityType="SevenMouths.Store.ShareTags" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="SevenMouths.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tags" EntityType="SevenMouths.Store.Tags" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserRoles" EntityType="SevenMouths.Store.UserRoles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="SevenMouths.Store.Users" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Votes" EntityType="SevenMouths.Store.Votes" store:Type="Tables" Schema="dbo" />
@@ -107,14 +108,6 @@
           <Property Name="Name" Type="nvarchar" MaxLength="64" />
           <Property Name="Description" Type="nvarchar" MaxLength="512" />
         </EntityType>
-        <EntityType Name="ShareCategories">
-          <Key>
-            <PropertyRef Name="ShareId" />
-          </Key>
-          <Property Name="ShareId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryId" Type="int" />
-          <Property Name="Description" Type="nvarchar" MaxLength="512" />
-        </EntityType>
         <EntityType Name="SharePictures">
           <Key>
             <PropertyRef Name="ShareId" />
@@ -132,9 +125,18 @@
           <Property Name="ShareNum" Type="int" />
           <Property Name="Title" Type="nvarchar" MaxLength="128" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CategoryId" Type="int" />
           <Property Name="SharedBy" Type="int" />
           <Property Name="SharedAt" Type="datetime" />
           <Property Name="Url" Type="nvarchar" MaxLength="512" />
+        </EntityType>
+        <EntityType Name="ShareTags">
+          <Key>
+            <PropertyRef Name="ShareId" />
+          </Key>
+          <Property Name="ShareId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TagId" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -145,6 +147,17 @@
           <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="TagId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" />
+          <Property Name="Code" Type="nvarchar" MaxLength="128" />
+          <Property Name="Description" Type="text" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedAt" Type="int" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
@@ -266,10 +279,11 @@
           <EntitySet Name="CoSiteUsers" EntityType="SevenMouths.CoSiteUser" />
           <EntitySet Name="Pictures" EntityType="SevenMouths.Picture" />
           <EntitySet Name="Roles" EntityType="SevenMouths.Role" />
-          <EntitySet Name="ShareCategories" EntityType="SevenMouths.ShareCategory" />
           <EntitySet Name="SharePictures" EntityType="SevenMouths.SharePicture" />
           <EntitySet Name="Shares" EntityType="SevenMouths.Share" />
+          <EntitySet Name="ShareTags" EntityType="SevenMouths.ShareTag" />
           <EntitySet Name="sysdiagrams" EntityType="SevenMouths.sysdiagram" />
+          <EntitySet Name="Tags" EntityType="SevenMouths.Tag" />
           <EntitySet Name="UserRoles" EntityType="SevenMouths.UserRole" />
           <EntitySet Name="Users" EntityType="SevenMouths.User" />
           <EntitySet Name="Votes" EntityType="SevenMouths.Vote" />
@@ -354,14 +368,6 @@
           <Property Type="String" Name="Name" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Description" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="ShareCategory">
-          <Key>
-            <PropertyRef Name="ShareId" />
-          </Key>
-          <Property Type="Int32" Name="ShareId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="CategoryId" />
-          <Property Type="String" Name="Description" MaxLength="512" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="SharePicture">
           <Key>
             <PropertyRef Name="ShareId" />
@@ -379,11 +385,20 @@
           <Property Type="Int32" Name="ShareNum" />
           <Property Type="String" Name="Title" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CategoryId" />
           <Property Type="Int32" Name="SharedBy" />
           <Property Type="DateTime" Name="SharedAt" />
           <Property Type="String" Name="Url" MaxLength="512" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Comments" Relationship="SevenMouths.FK_Comments_Shares" FromRole="Share" ToRole="Comment" />
           <NavigationProperty Name="Votes" Relationship="SevenMouths.FK_Votes_Shares" FromRole="Share" ToRole="Vote" />
+        </EntityType>
+        <EntityType Name="ShareTag">
+          <Key>
+            <PropertyRef Name="ShareId" />
+          </Key>
+          <Property Type="Int32" Name="ShareId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TagId" />
+          <Property Type="String" Name="Description" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -394,6 +409,17 @@
           <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="version" />
           <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Type="Int32" Name="TagId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Code" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" />
+          <Property Type="Int32" Name="CreatedAt" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -547,15 +573,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ShareCategories">
-            <EntityTypeMapping TypeName="SevenMouths.ShareCategory">
-              <MappingFragment StoreEntitySet="ShareCategories">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="ShareId" ColumnName="ShareId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SharePictures">
             <EntityTypeMapping TypeName="SevenMouths.SharePicture">
               <MappingFragment StoreEntitySet="SharePictures">
@@ -571,9 +588,19 @@
                 <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="SharedAt" ColumnName="SharedAt" />
                 <ScalarProperty Name="SharedBy" ColumnName="SharedBy" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ShareNum" ColumnName="ShareNum" />
+                <ScalarProperty Name="ShareId" ColumnName="ShareId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShareTags">
+            <EntityTypeMapping TypeName="SevenMouths.ShareTag">
+              <MappingFragment StoreEntitySet="ShareTags">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
                 <ScalarProperty Name="ShareId" ColumnName="ShareId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -586,6 +613,18 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="SevenMouths.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -643,35 +682,36 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="SevenMouths">
-        <EntityTypeShape EntityType="SevenMouths.Category" Width="1.5" PointX="0.75" PointY="7.75" Height="1.9700325520833388" />
-        <EntityTypeShape EntityType="SevenMouths.Comment" Width="1.5" PointX="3" PointY="1.125" Height="2.7341113281250031" />
-        <EntityTypeShape EntityType="SevenMouths.Cosite" Width="1.5" PointX="5.75" PointY="0.875" Height="2.1610522460937531" />
-        <EntityTypeShape EntityType="SevenMouths.CoSiteUser" Width="1.5" PointX="8" PointY="0.875" Height="2.161052246093746" />
-        <EntityTypeShape EntityType="SevenMouths.Picture" Width="1.5" PointX="2.75" PointY="7.75" Height="1.9700325520833388" />
-        <EntityTypeShape EntityType="SevenMouths.Role" Width="1.5" PointX="7.75" PointY="4.75" Height="1.5879931640625031" />
-        <EntityTypeShape EntityType="SevenMouths.ShareCategory" Width="1.5" PointX="7.75" PointY="7.75" Height="1.5879931640625031" />
-        <EntityTypeShape EntityType="SevenMouths.SharePicture" Width="1.5" PointX="4.75" PointY="8.75" Height="1.5879931640625031" />
-        <EntityTypeShape EntityType="SevenMouths.Share" Width="1.5" PointX="0.75" PointY="2.625" Height="2.7341113281250062" />
+        <EntityTypeShape EntityType="SevenMouths.Category" Width="1.5" PointX="0.75" PointY="7.75" Height="1.9700325520833246" />
+        <EntityTypeShape EntityType="SevenMouths.Comment" Width="1.5" PointX="3" PointY="1.125" Height="2.734111328124996" />
+        <EntityTypeShape EntityType="SevenMouths.Cosite" Width="1.5" PointX="5.75" PointY="0.875" Height="2.161052246093746" />
+        <EntityTypeShape EntityType="SevenMouths.CoSiteUser" Width="1.5" PointX="8" PointY="0.875" Height="2.1610522460937602" />
+        <EntityTypeShape EntityType="SevenMouths.Picture" Width="1.5" PointX="2.75" PointY="7.75" Height="1.9700325520833246" />
+        <EntityTypeShape EntityType="SevenMouths.Role" Width="1.5" PointX="7.75" PointY="4.75" Height="1.5879931640625102" />
+        <EntityTypeShape EntityType="SevenMouths.SharePicture" Width="1.5" PointX="7.75" PointY="7.75" Height="1.5879931640625102" />
+        <EntityTypeShape EntityType="SevenMouths.Share" Width="1.5" PointX="0.75" PointY="2.5" Height="2.9251310221354174" />
+        <EntityTypeShape EntityType="SevenMouths.ShareTag" Width="1.5" PointX="4.75" PointY="8.75" Height="1.5879931640625102" />
         <EntityTypeShape EntityType="SevenMouths.sysdiagram" Width="1.5" PointX="9.75" PointY="4.75" Height="1.9700325520833246" />
-        <EntityTypeShape EntityType="SevenMouths.UserRole" Width="1.5" PointX="9.75" PointY="7.75" Height="1.3969734700520746" />
+        <EntityTypeShape EntityType="SevenMouths.Tag" Width="1.5" PointX="9.75" PointY="7.75" Height="2.1610522460937602" />
+        <EntityTypeShape EntityType="SevenMouths.UserRole" Width="1.5" PointX="10.75" PointY="0.75" Height="1.3969734700520746" />
         <EntityTypeShape EntityType="SevenMouths.User" Width="1.5" PointX="5.75" PointY="5.25" Height="2.5430916341145746" />
         <EntityTypeShape EntityType="SevenMouths.Vote" Width="1.5" PointX="3" PointY="4.625" Height="2.161052246093746" />
         <AssociationConnector Association="SevenMouths.FK_Comments_Shares" >
-          <ConnectorPoint PointX="2.25" PointY="3.2420556640625016" />
-          <ConnectorPoint PointX="3" PointY="3.2420556640625016" />
+          <ConnectorPoint PointX="2.25" PointY="3.179555664062498" />
+          <ConnectorPoint PointX="3" PointY="3.179555664062498" />
         </AssociationConnector>
         <AssociationConnector Association="SevenMouths.FK_CoSiteUsers_Cosites" >
           <ConnectorPoint PointX="7.25" PointY="1.955526123046873" />
           <ConnectorPoint PointX="8" PointY="1.955526123046873" />
         </AssociationConnector>
         <AssociationConnector Association="SevenMouths.FK_CoSiteUsers_CoSiteUsers" >
-          <ConnectorPoint PointX="7.25" PointY="7.0439965820312516" />
-          <ConnectorPoint PointX="9.40625" PointY="7.0439965820312516" />
-          <ConnectorPoint PointX="9.40625" PointY="3.036052246093746" />
+          <ConnectorPoint PointX="7.25" PointY="7.0439965820312551" />
+          <ConnectorPoint PointX="9.40625" PointY="7.0439965820312551" />
+          <ConnectorPoint PointX="9.40625" PointY="3.0360522460937602" />
         </AssociationConnector>
         <AssociationConnector Association="SevenMouths.FK_Votes_Shares" >
-          <ConnectorPoint PointX="2.25" PointY="4.9920556640625033" />
-          <ConnectorPoint PointX="3" PointY="4.9920556640625033" />
+          <ConnectorPoint PointX="2.25" PointY="5.0250655110677087" />
+          <ConnectorPoint PointX="3" PointY="5.0250655110677087" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

@@ -188,13 +188,16 @@
     <Compile Include="Models\Share.cs">
       <DependentUpon>SevenMouths.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ShareCategory.cs">
-      <DependentUpon>SevenMouths.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SharePicture.cs">
       <DependentUpon>SevenMouths.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShareTag.cs">
+      <DependentUpon>SevenMouths.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>SevenMouths.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tag.cs">
       <DependentUpon>SevenMouths.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">

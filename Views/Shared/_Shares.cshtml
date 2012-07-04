@@ -16,6 +16,8 @@
     
 </script>
 
+<a href="/Shares/Add"><input type="button" class="button" value="我要添加分享"/></a>
+
 <table class="shares">
     <thead>
         <tr>
@@ -34,6 +36,8 @@
             User sharer = context.Users.FirstOrDefault(x => x.UserId == share.SharedBy);
             int upCount = context.Votes.Count(x => x.ShareId == share.ShareId && x.Value > 0);
             int downCount = context.Votes.Count(x => x.ShareId == share.ShareId && x.Value < 0);
+            //计算评论的条数	
+            int comment = context.Comments.Count(x => x.ShareId == share.ShareId);
             <tr>
                 <td>@share.ShareNum</td>
                 <td><a href ="@share.Url">@share.Title</a></td>
@@ -47,7 +51,10 @@
             <tr>
             <td colspan="6">
                 <ul>
-                    @Html.Partial("_Comments",share)
+                    @if (comment != 0)
+                    {
+                        @Html.Partial("_Comments", share)
+                    }
                 </ul>
             </td>
             </tr>

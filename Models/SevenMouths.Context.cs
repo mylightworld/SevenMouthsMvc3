@@ -113,12 +113,6 @@ namespace SevenMouths.Models
         }
         private ObjectSet<Role> _roles;
     
-        public ObjectSet<ShareCategory> ShareCategories
-        {
-            get { return _shareCategories  ?? (_shareCategories = CreateObjectSet<ShareCategory>("ShareCategories")); }
-        }
-        private ObjectSet<ShareCategory> _shareCategories;
-    
         public ObjectSet<SharePicture> SharePictures
         {
             get { return _sharePictures  ?? (_sharePictures = CreateObjectSet<SharePicture>("SharePictures")); }
@@ -131,11 +125,23 @@ namespace SevenMouths.Models
         }
         private ObjectSet<Share> _shares;
     
+        public ObjectSet<ShareTag> ShareTags
+        {
+            get { return _shareTags  ?? (_shareTags = CreateObjectSet<ShareTag>("ShareTags")); }
+        }
+        private ObjectSet<ShareTag> _shareTags;
+    
         public ObjectSet<sysdiagram> sysdiagrams
         {
             get { return _sysdiagrams  ?? (_sysdiagrams = CreateObjectSet<sysdiagram>("sysdiagrams")); }
         }
         private ObjectSet<sysdiagram> _sysdiagrams;
+    
+        public ObjectSet<Tag> Tags
+        {
+            get { return _tags  ?? (_tags = CreateObjectSet<Tag>("Tags")); }
+        }
+        private ObjectSet<Tag> _tags;
     
         public ObjectSet<UserRole> UserRoles
         {

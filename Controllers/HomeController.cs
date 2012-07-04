@@ -22,8 +22,7 @@ namespace SevenMouths.Controllers
         public ActionResult GetVedios()
         { 
             int categoryId = context.Categories.FirstOrDefault(x => x.Name == "vedio").CategoryId;
-            List<int> shareIds = context.ShareCategories.Where(x => x.CategoryId == categoryId).Select(x => x.ShareId).ToList();
-            List<Share> vedios = context.Shares.Where(x => shareIds.Contains(x.ShareId)).ToList();
+            List<Share> vedios = context.Shares.Where(x => x.CategoryId == categoryId).ToList();
 
             return View(vedios);
         }
@@ -33,8 +32,7 @@ namespace SevenMouths.Controllers
         public ActionResult GetBooks()
         {
             int categoryId = context.Categories.FirstOrDefault(x => x.Name == "book").CategoryId;
-            List<int> shareIds = context.ShareCategories.Where(x => x.CategoryId == categoryId).Select(x => x.ShareId).ToList();
-            List<Share> books = context.Shares.Where(x => shareIds.Contains(x.ShareId)).ToList();
+            List<Share> books = context.Shares.Where(x => x.CategoryId == categoryId).ToList();
 
             return View(books);
         }

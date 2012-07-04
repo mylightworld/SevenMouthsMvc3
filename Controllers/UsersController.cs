@@ -73,7 +73,7 @@ namespace SevenMouths.Controllers
             }
             string password = collection["password"];
             string pwdConfirm = collection["pwdConfirm"];
-            if (password.Length <= 6 || pwdConfirm.Length <= 6)
+            if (password.Length < 6 || pwdConfirm.Length < 6)
             {
                 ViewBag.message = "密码不允许小于6位！";
                 return View();
