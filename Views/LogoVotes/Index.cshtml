@@ -1,0 +1,29 @@
+﻿@using SevenMouths.Models
+@model List<Logo>
+@{
+    ViewBag.Title = "网站Logo投票";
+    SevenMouthsEntities context = new SevenMouthsEntities();
+}
+
+<h2>网站Logo投票</h2>
+
+<div class="logos">
+    <ul>
+        @foreach (var logo in Model)
+        {
+            <li>
+            <div>
+                <div style="margin-bottom:10px;"><b>@logo.Title</b></div>
+                <div>
+                    <img src="@logo.PicUrl" class="logo-candidates" alt="" />
+                </div>
+                <div class="action">
+                <a href="javascript:;" onclick="logoVoteToUp(@logo.LogoId,$(this));"><img src="" alt="" />顶(<span>@(context.LogoVotes.Count(x => x.LogoId == logo.LogoId && x.Value >0))</span>)</a>
+                <a href="javascript:;" onclick="logoVoteToDown(@logo.LogoId,$(this));"><img src="" alt="" />踩(<span>@(context.LogoVotes.Count(x => x.LogoId == logo.LogoId && x.Value < 0))</span>)</a>
+                </div>
+            </div>
+            </li>
+        }
+    </ul>
+</div>
+

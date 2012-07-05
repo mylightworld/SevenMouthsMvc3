@@ -15,9 +15,12 @@ namespace SevenMouths.Controllers
     
     public class UsersController : BaseController
     {
-        [LoginFilter]
         public ActionResult Login()
         {
+            if (cookie.IsLogin)
+            {
+                return Redirect("/LogoVotes/Index");
+            }
             return View();
         }
 
@@ -33,7 +36,8 @@ namespace SevenMouths.Controllers
                 if (user.Password == password)
                 {
                     cookie["UserId", true, false] = user.UserId.ToString();
-                    return Redirect("/Home/Index");
+                    //return Redirect("/Home/Index");
+                    return Redirect("/LogoVotes/Index");
                 }
                 else
                 {
@@ -48,6 +52,7 @@ namespace SevenMouths.Controllers
             }
         }
 
+        [LoginFilter]
         public ActionResult Register()
         {
             return View();
@@ -100,24 +105,29 @@ namespace SevenMouths.Controllers
                             user.UserNum = CommomHelper.GetRandomNum();
                             user.Email = emailOrName;
                             user.Password = password;
+                            user.MainPictureUrl = "/image/default-portrait.jpg";
                             context.Users.AddObject(user);
                             context.SaveChanges();
 
                             //保存或更新cookie
                             cookie["UserId", true, false] = user.UserId+"";
-                            return Redirect("/Home/Index");
+                            //return Redirect("/Home/Index");
+                            return Redirect("/LogoVotes/Index");
                         }
                     }
                     else//输入的是用户名
                     {
+                        user.UserNum = CommomHelper.GetRandomNum();
                         user.Name = emailOrName;
                         user.Password = password;
+                        user.MainPictureUrl = "/image/default-portrait.jpg";
                         context.Users.AddObject(user);
                         context.SaveChanges();
 
                         //保存或更新cookie
                         cookie["UserId", true, false] = user.UserId + "";
-                        return Redirect("/Home/Index");
+                        //return Redirect("/Home/Index");
+                        return Redirect("/LogoVotes/Index");
                     }
                     
                 }

@@ -9,7 +9,7 @@ ul li{list-style-type:none;margin-right:15px;height:17px;}
 .button{width:auto;height:25px;background-color:#E6E6FA;cursor:pointer;color:#C71585;}
 
 /******头像********/
-.head-portrait{width:15px;height:15px;cursor:pointer;}
+.head-portrait{width:35px;height:35px;cursor:pointer;margin-right:3px;}
 /*********普通图标*******/
 .icon{width:17px;height:17px;cursor:pointer;}
 

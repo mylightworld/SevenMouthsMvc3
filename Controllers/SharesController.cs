@@ -30,7 +30,7 @@ namespace SevenMouths.Controllers
                 context.SaveChanges();
             }
 
-            var dataReturn = new { upCounts = context.Votes.Count(x => x.Value > 0) };
+            var dataReturn = new { upCounts = context.Votes.Count(x => x.ShareId == id && x.Value > 0) };
             return Json(dataReturn);
         }
 
@@ -49,7 +49,7 @@ namespace SevenMouths.Controllers
                 context.SaveChanges();
             }
 
-            var dataReturn = new { downCounts = context.Votes.Count(x => x.Value <0) };
+            var dataReturn = new { downCounts = context.Votes.Count(x => x.ShareId == id && x.Value < 0) };
             return Json(dataReturn);
         }
 

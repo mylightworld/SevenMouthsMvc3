@@ -101,6 +101,18 @@ namespace SevenMouths.Models
         }
         private ObjectSet<CoSiteUser> _coSiteUsers;
     
+        public ObjectSet<Logo> Logos
+        {
+            get { return _logos  ?? (_logos = CreateObjectSet<Logo>("Logos")); }
+        }
+        private ObjectSet<Logo> _logos;
+    
+        public ObjectSet<LogoVote> LogoVotes
+        {
+            get { return _logoVotes  ?? (_logoVotes = CreateObjectSet<LogoVote>("LogoVotes")); }
+        }
+        private ObjectSet<LogoVote> _logoVotes;
+    
         public ObjectSet<Picture> Pictures
         {
             get { return _pictures  ?? (_pictures = CreateObjectSet<Picture>("Pictures")); }

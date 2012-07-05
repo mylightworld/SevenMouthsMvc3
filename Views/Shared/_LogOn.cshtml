@@ -21,6 +21,20 @@
     <b><span><a href="/Users/Login">登录</a></span>|</b>
   }
   <b><span><a href="/Users/Register">注册</a></span>|</b>
-  <b><span><a href="/Shares/Add">偶要分享</a></span>|</b>
-  <b><span><a href="/Home/Index">首页</a></span></b>
+  @*<b><span><a href="/Shares/Add">偶要分享</a></span>|</b>
+  <b><span><a href="/Home/Index">首页</a></span></b>*@
+  <b><span><a href="javascript:;" onclick="validateToLogoVote('@(cookie.IsLogin)');">投票首页</a></span></b>
   </span>
+
+ <script type="text/javascript">
+     //跳转主页前检查是否登录
+     function validateToLogoVote(isLogin) {
+
+         if (isLogin.toLowerCase() == "true") {
+             window.location = "/LogoVotes/Index";
+         }
+         else {
+             alert("那个……还没登录吧？！");
+         }
+     }
+ </script>
