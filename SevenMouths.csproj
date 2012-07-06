@@ -45,7 +45,7 @@
     </Reference>
     <Reference Include="QzoneSDK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ef7dce604f21347b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\QzoneSDK.dll</HintPath>
+      <HintPath>DLL\QzoneSDK.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity">
       <Private>False</Private>
@@ -220,6 +220,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\themes\base\images\Connect_logo_3.png" />
     <Content Include="css\commom.css" />
     <Content Include="css\logoVote.css" />
     <Content Include="css\Share.css" />
@@ -244,6 +245,7 @@
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="image\closeOrDelete.jpg" />
+    <Content Include="image\Connect_logo_3.png" />
     <Content Include="image\down.jpg" />
     <Content Include="image\duck.jpg" />
     <Content Include="image\idonothave.jpg" />
