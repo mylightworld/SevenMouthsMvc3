@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using SevenMouths.Models;
-using SevenMouths.Helpers;
+﻿using System.Collections.Generic;
 using System.Configuration;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Converters;
+using System.Linq;
+using System.Web.Mvc;
+using SevenMouths.Helpers;
+using SevenMouths.Models;
 
 namespace SevenMouths.Controllers
 {
@@ -161,6 +156,7 @@ namespace SevenMouths.Controllers
 
         public ActionResult LoginQZone()
         {
+
             string key = ConfigurationManager.AppSettings["ConsumerKey"];
             string secret = ConfigurationManager.AppSettings["ConsumerSecret"];
 
@@ -198,6 +194,8 @@ namespace SevenMouths.Controllers
 
             return View();
         }
+
+   
 
         #endregion
 
