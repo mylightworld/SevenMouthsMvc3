@@ -101,6 +101,18 @@ namespace SevenMouths.Models
         }
         private ObjectSet<CoSiteUser> _coSiteUsers;
     
+        public ObjectSet<Logo> Logos
+        {
+            get { return _logos  ?? (_logos = CreateObjectSet<Logo>("Logos")); }
+        }
+        private ObjectSet<Logo> _logos;
+    
+        public ObjectSet<LogoVote> LogoVotes
+        {
+            get { return _logoVotes  ?? (_logoVotes = CreateObjectSet<LogoVote>("LogoVotes")); }
+        }
+        private ObjectSet<LogoVote> _logoVotes;
+    
         public ObjectSet<Picture> Pictures
         {
             get { return _pictures  ?? (_pictures = CreateObjectSet<Picture>("Pictures")); }
@@ -112,12 +124,6 @@ namespace SevenMouths.Models
             get { return _roles  ?? (_roles = CreateObjectSet<Role>("Roles")); }
         }
         private ObjectSet<Role> _roles;
-    
-        public ObjectSet<ShareCategory> ShareCategories
-        {
-            get { return _shareCategories  ?? (_shareCategories = CreateObjectSet<ShareCategory>("ShareCategories")); }
-        }
-        private ObjectSet<ShareCategory> _shareCategories;
     
         public ObjectSet<SharePicture> SharePictures
         {
@@ -131,11 +137,23 @@ namespace SevenMouths.Models
         }
         private ObjectSet<Share> _shares;
     
+        public ObjectSet<ShareTag> ShareTags
+        {
+            get { return _shareTags  ?? (_shareTags = CreateObjectSet<ShareTag>("ShareTags")); }
+        }
+        private ObjectSet<ShareTag> _shareTags;
+    
         public ObjectSet<sysdiagram> sysdiagrams
         {
             get { return _sysdiagrams  ?? (_sysdiagrams = CreateObjectSet<sysdiagram>("sysdiagrams")); }
         }
         private ObjectSet<sysdiagram> _sysdiagrams;
+    
+        public ObjectSet<Tag> Tags
+        {
+            get { return _tags  ?? (_tags = CreateObjectSet<Tag>("Tags")); }
+        }
+        private ObjectSet<Tag> _tags;
     
         public ObjectSet<UserRole> UserRoles
         {

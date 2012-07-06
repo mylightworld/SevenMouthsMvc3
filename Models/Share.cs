@@ -89,6 +89,21 @@ namespace SevenMouths.Models
         private string _description;
     
         [DataMember]
+        public Nullable<int> CategoryId
+        {
+            get { return _categoryId; }
+            set
+            {
+                if (_categoryId != value)
+                {
+                    _categoryId = value;
+                    OnPropertyChanged("CategoryId");
+                }
+            }
+        }
+        private Nullable<int> _categoryId;
+    
+        [DataMember]
         public Nullable<int> SharedBy
         {
             get { return _sharedBy; }

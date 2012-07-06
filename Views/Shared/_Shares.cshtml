@@ -10,11 +10,18 @@
         $("tr td").corner("10px");
         $("textarea").corner("10px");
         $(".comment-now").corner("10px");
+        $("img").corner("5px");
 
     });
     
 </script>
+<<<<<<< HEAD
 <a href='@Url.Action("Index", "Post")'>New Post</a>
+=======
+
+<a href="/Shares/Add"><input type="button" class="button" value="我要添加分享"/></a>
+
+>>>>>>> 6c23d9648d134c047c3b78b6100d9755c35670c3
 <table class="shares">
     <thead>
         <tr>
@@ -47,7 +54,11 @@
             User sharer = context.Users.FirstOrDefault(x => x.UserId == share.SharedBy);
             int upCount = context.Votes.Count(x => x.ShareId == share.ShareId && x.Value > 0);
             int downCount = context.Votes.Count(x => x.ShareId == share.ShareId && x.Value < 0);
+<<<<<<< HEAD
             //计算评论的条数
+=======
+            //计算评论的条数	
+>>>>>>> 6c23d9648d134c047c3b78b6100d9755c35670c3
             int comment = context.Comments.Count(x => x.ShareId == share.ShareId);
             <tr>
                 <td>@share.ShareNum
@@ -71,6 +82,7 @@
                 </td>
             </tr>
             <tr>
+<<<<<<< HEAD
                 <td colspan="6">
                     <ul>
                         @if (comment != 0)
@@ -79,6 +91,16 @@
                         }
                     </ul>
                 </td>
+=======
+            <td colspan="6">
+                <ul>
+                    @if (comment != 0)
+                    {
+                        @Html.Partial("_Comments", share)
+                    }
+                </ul>
+            </td>
+>>>>>>> 6c23d9648d134c047c3b78b6100d9755c35670c3
             </tr>
         }
     </tbody>

@@ -1,0 +1,43 @@
+﻿@using SevenMouths.Models
+@{
+    ViewBag.Title = "添加分享";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<h2>添加分享</h2>
+
+<form action="/Shares/Add" method="post" id="addShareForm" onsubmit="return validateAddShare();">
+    <div class="shares-add">
+        <fieldset style="height:370px;">
+            <legend>添加分享</legend>
+            <div>
+                <ul class="shares-add-ul">
+                    <li><span>分享名：</span><input type="text" name="title" id="title" /></li>
+                    <li><span>类别：</span>
+                    <select name="category" id="category">
+                    @foreach (var category in ViewBag.categories as List<Category>)
+                    { 
+                        <option value="@category.CategoryId">@category.Description</option>
+                    }
+                    </select>
+                    </li>
+                    <li><span>描述：</span><div style="height:40px;"><textarea name="description" id="description" cols="75" rows="5"></textarea></div></li>
+                    <li style="margin-top:70px;"><span>链接：</span><input type="text" name="url" id="url" style="width:546px;"/></li>
+                    <li><span>分享理由：</span><div><textarea name="reason" id="reason" cols="75" rows="5"></textarea></div></li>
+                    <li style="margin-top:70px;">
+                        <span>打个分吧：</span>
+                        <select name="score" id="score">
+                            @for (int i = 0; i <= 10; i++)
+                            { 
+                                <option value="@i">@(i)分</option>
+                            }
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div><input type="submit" class="button" value="提交" style="margin-top:15px;margin-left:170px;margin-bottom:5px;"/></div>
+            <div class="message" style="margin-left:15%;"></div>
+        </fieldset>
+    </div>
+</form>
+

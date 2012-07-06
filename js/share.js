@@ -38,3 +38,31 @@ function submitComment(shareId,parentId,$button) {
     });
 
 }
+
+//添加分享前检查
+function validateAddShare() {
+
+    if ($("#title").val().trim() == ""){
+        $("#title").addClass("illegal");
+        $("#title").focus();
+        $(".message").html("标题不允许为空！");
+        return false;
+    }
+    else {
+        $("#title").removeClass("illegal");
+        $(".message").html("");
+    }
+
+    if ($("#reason").val().trim() == "") {
+        $("#reason").addClass("illegal");
+        $("#reason").focus();
+        $(".message").html("分享理由不允许为空！");
+        return false;
+    }
+    else {
+        $("#reason").removeClass("illegal");
+        $(".message").html("");
+    }
+
+    return true;
+}

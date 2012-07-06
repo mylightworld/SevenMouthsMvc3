@@ -4,3 +4,8 @@
 .shares tr td{width:10%;text-align:center;}
 .shares tr{height:30px;}
 .shares tbody tr:nth-child(odd){background-color:#F0F0F0;}
+
+/**********分享增、删、查、改**************/
+.shares-add{margin:15px;}
+.shares-add ul li{margin-top:10px;margin-bottom:5px;}
+.shares-add ul li span{width:120px;text-align:right;float:left;}

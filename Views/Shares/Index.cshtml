@@ -1,0 +1,11 @@
+﻿@using SevenMouths.Models
+@model List<Share>
+@{
+    ViewBag.Title = "我的分享";
+}
+
+<h2>我的分享列表</h2>
+
+<div style="clear:both;">
+    @Html.Partial("_Shares",Model)
+</div>

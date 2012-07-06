@@ -163,6 +163,12 @@
     <Compile Include="Models\CoSiteUser.cs">
       <DependentUpon>SevenMouths.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Logo.cs">
+      <DependentUpon>SevenMouths.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LogoVote.cs">
+      <DependentUpon>SevenMouths.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Picture.cs">
       <DependentUpon>SevenMouths.tt</DependentUpon>
     </Compile>
@@ -190,13 +196,16 @@
     <Compile Include="Models\Share.cs">
       <DependentUpon>SevenMouths.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ShareCategory.cs">
-      <DependentUpon>SevenMouths.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SharePicture.cs">
       <DependentUpon>SevenMouths.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShareTag.cs">
+      <DependentUpon>SevenMouths.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>SevenMouths.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tag.cs">
       <DependentUpon>SevenMouths.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
@@ -212,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\commom.css" />
+    <Content Include="css\logoVote.css" />
     <Content Include="css\Share.css" />
     <Content Include="css\User.css" />
     <Content Include="DLL\Newtonsoft.Json.dll" />
@@ -238,7 +248,16 @@
     <Content Include="image\duck.jpg" />
     <Content Include="image\idonothave.jpg" />
     <Content Include="image\ihave.jpg" />
+    <Content Include="image\logos\7z8she.jpg" />
+    <Content Include="image\logos\7z8she2.jpg" />
+    <Content Include="image\logos\7z8she3.jpg" />
+    <Content Include="image\logos\7z8she4.jpg" />
+    <Content Include="image\logos\7z8she5.jpg" />
+    <Content Include="image\logos\7z8she6.jpg" />
+    <Content Include="image\logos\7z8she7.jpg" />
+    <Content Include="image\logos\7z8she8.jpg" />
     <Content Include="image\qq2.jpg" />
+    <Content Include="image\default-portrait.jpg" />
     <Content Include="image\up.jpg" />
     <Content Include="js\commom.js" />
     <Content Include="js\jquery-1.6.2-vsdoc.js" />
@@ -248,6 +267,7 @@
     <Content Include="js\jquery-ui-1.8.11.js" />
     <Content Include="js\jquery-ui-1.8.11.min.js" />
     <Content Include="js\corner.js" />
+    <Content Include="js\logoVote.js" />
     <Content Include="js\share.js" />
     <Content Include="js\user.js" />
     <Content Include="Web.config">
@@ -314,6 +334,9 @@
     <Content Include="Views\Users\OnLoginQZone.cshtml" />
     <Content Include="Views\Users\Register.cshtml" />
     <Content Include="Views\Post\Index.cshtml" />
+    <Content Include="Views\Shares\Add.cshtml" />
+    <Content Include="Views\Shares\Index.cshtml" />
+    <Content Include="Views\LogoVotes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
